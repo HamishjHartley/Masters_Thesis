@@ -1,0 +1,237 @@
+\section{Methodology}
+%Redo research methodology section.
+%Redo data analysis section.
+
+\subsection{Research methodology}
+%Research methodology description
+
+% 1.2 Provide a problem statement with a strong hypothesis / Define your methodological approach 
+Contemporary tools used to map network topologies such as Paristraceroute\cite{anomalies} and DiamondMiner\cite{diamond-miner} have improved on the original traceroute. However, these contemporary methods still have deficiencies, suggesting that there is still potential for these tools to be extended to mitigate these flaws. Thorough analysis of results from the literature and also from experimentation in a virtually implemented network will form the basis of the proposed improvements to the contemporary methods. 
+
+In order to ensure the validity of the findings from experimentation in the virtual network lab and also create a testing framework which can be used to benchmark contemporary network scanning methods in the future, a multi-factorial approach will be employed. This includes a purposeful sample selection; topologies most commonly found in real world networks will be implemented, these include Bus, Ring, Mesh, Star, Tree and Hybrid configurations. This is to ensure that the selected sample population is representative of the overall population. Furthermore, a robust enumeration of macros across all possible network shapes will be explored, this will likely increase the available search space covered by the evaluation, through testing and evaluating the edge cases. Using this approach has the benefit of possibly highlighting potential flaws and unexpected behaviour of current methods, in a way that using conventional structures might not. By combining both  'real-world' and theoretical network topology structures, the implemented network lab has improved versatility and coverage of yielded data.  
+
+% 3. State research design
+\subsection{Research methods}
+%Research methods description
+Evaluation of the contemporary methods will be primarily quantitative. With the main measure of performance being focusing on the accuracy of the path tracking when tested on network structures in the virtual lab. Additionally, the execution time, packet loss handling  will also be taken into account.
+
+They will be evaluated using ContainerLab \cite{containerlab} which is an open source network emulator which allows the creation of virtual network environments, leveraging the powerful docker framework, it supports containerized router images of products offers by major companies such as Cicso, Juniper and Dell. For the purpose of this research project, Alpine Linux will be used for the container images, due to it's low running constraints compared with similar Linux distributions such as Debian\cite{alpine} and open-source code base. This mitigates any potential memory concerns when simulating more complex network topologies. Furthermore, by evaluating the contemporary tools in a virtual network lab the experiment variables are fully controllable, allowing for repeatable results and avoidance of external interference. By using a virtual environment the possibility of numerous results being collected for each configuration are ensured, allowing statistical analysis of the results to be carried out. This further increases the validity of the evaluation. Additionally, by simulating the network topologies ethical implications of evaluating performance on the real-world internet are avoided. 
+
+% 4. Discuss specifics of data collection and methodology
+
+% 5. Justify methods used - mention limitations, strengths and weaknesses.
+
+\subsection{Virtual Network lab}
+To facilitate evaluation of the contemporary network scanning tools, a virtual network lab has been created. The implemented virtual network lab was created inside a virtual machine running the Debian based Linux Operating System  Kali Linux. 
+
+Using this approach allows for an isolated testing environment, avoiding external factors which could interfere with the experimental results. Furthermore, by employing a virtual lab complete control and configuration of the experimental variables is ensured. Due to this the experimental results can be replicated a number of times, increasing the validity of the findings. 
+
+Additionally, due to the portability of virtual machines across varying Operating systems, the configuration and findings from this research can be readily built upon and revised, encouraging more work in this area.
+
+In order to measure and compare the performance of tools utilised to map network topologies in an objective manner, a standardised testing environment should be employed. Creation and design of this given testing environment will be based upon a multi-factorial approach; by utilising structures which are representative of real world network topology, using configurations such as so-called "star" and "bus" topologies will ensure a realistic measurement of expected performance with a high probability of confidence due to their prevalence across many varying topologies. 
+
+Additionally, in conjunction with the practical real-world approach, a robust enumeration of all possible network shapes will be employed to increase the available performance search space of each tool in topology measurement. Utilising this stochastic approach allows for potential edge cases to be identified, possibly highlighting previously unknown design flaws/weaknesses in a given tool. 
+
+\subsection{Topology models}
+Below, the network topology models used in the creation of the virtual network lab will be described and outlined, in order to justify the rationale and decision making process in creation of the final models. 
+
+\subsubsection{Ring topology}
+A Ring topology comprises of a set of nodes connected in a circular manner. In other words, each node is connected to precisely two other nodes. This results in a singular uninterrupted route for data to travel through each node. Internet service providers employ ring network's for the "backbone" of many of their networks \cite{ring_network}, furthermore it is also commonly found on local area networks and Intranets. Due to it's circular nature it has a "low transmission efficiency and high delay", for a packet to traverse the entire network it must first past through every preceding node. This also highlights its other deficiency; it's unreliability. If a node or link breaks in the network, the nodes beyond are unreachable. \cite{ring_network}
+
+\subsubsection{Bus topology}
+A bus topology comprises of nodes which are directly connected to a shared link, called a "bus". As a consequence of this, nodes in the network are not directly connected to one another with the bus carrying all of the transmitted data between each node in the network. Due to the simplicity of it's design the bus topology is relatively straightforward to establish and also has a low setup cost; however it faces problems with scalability, due for the potential for collisions to occur between transmitted packets along the shared bus negatively impacting network performance. Furthermore, the bus topology lacks reliability, if the bus link is damaged/broken the entire network could go down. 
+
+\subsubsection{Star topology}
+A star topology comprises of a central node, with terminal nodes radially connected outwards. In order for data to be transferred  between the terminal nodes in the network, it must pass through the central node, thus much like the bus topology, direct data transfer between the terminal nodes is not possible. \cite{star_zig} Due to the independent connection of each node to the central node, the topology is relatively fault tolerant as one link braking will not impact the other connections in the network. Furthermore, should a potential fault occur, it can be more readily dealt with, due to the increased ability to identify and distinguish sources of problems in the network. Star topologies are commonly found across many different use-cases and contexts; such as a  home network, where each device is directly and independently connected to a centralised router/hub. 
+
+\subsubsection{Mesh topology}
+Mesh topologies are composed of nodes which are connected directly and non-hierarchically to one another. They can be classified as either partially connected or fully connected, whereby nodes are partly connected and fully connected respectively to form a "mesh" structure. Due to the mutual connections between every node in the network, there is a lack of dependancy
+
+\subsubsection{Tree topology}
+A tree topology is a form of hybrid network topology, it consists of both star and bus networks. It is composed of star networks connected together through a shared bus network. \cite{tree_book} Furthermore, due to the characteristics of it's component topologies, star and bus, the tree topology is well suited to be used for networks that span "large geographical areas" \cite{Qos_simulation}. 
+
+By combining star and bus topological structures, the tree topology can benefit from the strengths of both component topologies; the efficiency and robustness of star networks and also the simplicity and low overhead cost of bus networks.
+
+Tree network topologies can be characterised as both "Regular" and "Random". A regular tree network's topology structure is specified by the branching, $d$, and also the number of generations, $G$ \cite{tree_nature}. With the total number of nodes and peripheral nodes ($N$ and $N_p$ respectively) given by the following:
+
+\begin{equation}
+    N = \frac{d^{G+1}-1}{d-1}
+\end{equation}
+
+\begin{equation}
+    N_d = d^G
+\end{equation}
+
+\subsubsection{Hybrid topology}
+Hybrid topologies are composed of multiple varying simple topologies which combine to create new composite structures. as previously mentioned the tree topology is one such example of a hybrid topology; whereby star and bus topologies combine to create a new more complex structure. Theoretically, there are infinite combinations of simple topologies which combine to create hybrid topologies, due to there being no defined size and complexity constraints. However, in real-world network's there are a set of commonly found hybrid topology configurations which form the vast majority of all networks.
+
+Real world examples of hybrid network topologies include a University campus intranet or in an enterprise context. 
+
+\subsection{Stochastic topologies}
+With the aim to implement randomly generated network topologies for the purpose of evaluation in the virtual network lab, a framework is proposed. Firstly the individual parameters which are involved in the creation of a network topology structure must be identified. 
+
+\subsubsection{Basic approach}
+Following an elementary approach which is concerned with the basic 'building-blocks' of a network topology, one can identify these as the number of nodes, the number of links each node has, the origin node and target node of each link. 
+
+\subsubsection{Individual topologies}
+Another approach could be to vary the structure of a specific individual topology type at random, based on their defined character and attributes. This would likely be of more interest using more complex structures such as a 'tree' topology, which is expressed through the parameters $d$, $G$.
+
+\subsubsection{Topology library}
+A further approach which could be employed would be to have a set of varying basic topologies to form a topology library. This set would include bus, star, mesh and ring topologies of differing sizes and structures. The parameters for random generation of the topology structure in this instance would be the topologies which are to be selected at random from the set, a random number of times, and also how each of these selected topologies would be connected to each other to form a complete logical structure. 
+
+\subsubsection{Erdos-Renyi Model}
+
+\begin{algorithm}
+\caption{\( G(n, p) \) Erdős-Rényi Model}\label{alg:Gnp}
+\begin{algorithmic}[1]
+\State \textbf{Input:} Number of nodes \( n \), probability \( p \)
+\State \textbf{Output:} Random graph \( G(V, E) \)
+
+\State \textbf{Step 1:} \textbf{Initialization}
+\State Create a set of \( n \) nodes \( V = \{v_1, v_2, \dots, v_n\} \).
+\State Initialize an empty set of edges \( E = \emptyset \).
+
+\State \textbf{Step 2:} \textbf{Edge Creation}
+\For{each pair of nodes \( (v_i, v_j) \) with \( 1 \leq i < j \leq n \)}
+    \State Generate a random number \( r \) uniformly distributed between 0 and 1.
+    \If{\( r \leq p \)}
+        \State Add the edge \( (v_i, v_j) \) to the edge set \( E \).
+    \EndIf
+\EndFor
+
+\State \textbf{Step 3:} \textbf{Output the graph}
+\State The graph \( G(V, E) \) consists of the node set \( V \) and the edge set \( E \).
+\end{algorithmic}
+\end{algorithm}
+
+\subsubsection{Barabasi-Albert Model}
+
+%Discuss how it is likened to real-world networks such as the WWW and social networks, think it would be highly applicable for this use-case.
+The Barabasi-Albert models is an algorithm which  produces random scale-free networks, the networks are generated utilising a preferential attachment approach. Whereby the more links a given node has to other nodes, the higher the probability it will get more new links. A node's degree is the probability of garnering new link's with other nodes.
+
+Initially the network starts with a network of $m_0$ nodes, at each step a new node is added with $m$ edges which link it to $m$ different nodes. The probability that a new node will connect to an existing node $i$ is given by \ref{eq:3}, where $k_i$ is the degree of node $i$, and the sum is over all existing nodes $j$. \cite{Albert_barabasi_2002} 
+
+\begin{equation} \label{eq:3}
+    p_i = \frac{k_i}{\Sigma_jk_j}
+\end{equation}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/BA_9.png}
+    \caption{9 different randomly generated networks using the BA model algorithm, each with varying n and m values to illustrate the impact of each parameter}
+    \label{fig:BA_9}
+\end{figure}
+
+\begin{algorithm}
+\caption{Barabási-Albert (BA) Model Algorithm}\label{alg:BA}
+\begin{algorithmic}[1]
+\State \textbf{Input:} Initial number of nodes $m_0$, number of edges to attach $m \leq m_0$, total number of nodes $N$
+\State \textbf{Output:} Scale-free network with $N$ nodes
+\State
+
+\State \textbf{Step 1:} \textbf{Initialization}
+\State Create an initial network with $m_0$ nodes and connect every node to every other node (complete graph).
+
+\State \textbf{Step 2:} \textbf{Growth}
+\For{$i = m_0 + 1$ to $N$}
+    \State Add a new node $i$ with $m$ edges.
+    \State Connect the new node $i$ to $m$ existing nodes chosen with probability proportional to their degree.
+    \For{each existing node $j$}
+        \State Calculate the probability $\Pi(j)$ that node $i$ connects to node $j$:
+        \[
+        \Pi(j) = \frac{k_j}{\sum_{l} k_l}
+        \]
+        where $k_j$ is the degree of node $j$ and the sum is over all existing nodes $l$.
+    \EndFor
+\EndFor
+
+\State \textbf{Step 3:} \textbf{Repeat}
+\State Repeat the growth process until the network contains $N$ nodes.
+
+\State \textbf{Step 4:} \textbf{Output the network}
+\State Return the generated scale-free network.
+\end{algorithmic}
+\end{algorithm}
+
+\subsubsection{Implementation}
+Each of these approaches could be facilitated by implementing them in python to create custom topology definition files in such a way which can then be parsed by containerlab to deploy and host the topologies virtually. 
+The python library networkx has stochastic graph generating functions which can implement the Erdos-Renyl and Barabasi-Albert models, reducing overall development time and ensuring accurate and efficient code. 
+
+\subsubsection{Oracle VM VirtualBox}
+% Virtual environment allows greater portability
+Oracle VM VirtualBox is an open source cross-platform virtualization software using a Type 2 hypervisor. \cite{VirtualWare} It's ease of installation and use on all of the major Operating Systems including Microsoft Windows, macOS, Linux, Solaris and OpenSolaris \cite{oracleVM} allows for high portability and cohesion. 
+
+Due to the traceroute tools being developed for a Linux based operating system, VirtualBox is being used to host a Linux distribution on a windows machine without the need for a dual-boot or separate computer.
+
+\subsubsection{Docker}
+% Outline docker, and containers
+Docker allows application images to be deployed in isolated containers \cite{docker_isolate}. This avoids the potential computational overhead of running an operating system using a virtual machine, and also allows for ease of deployment. It can be built into new and existing pipelines for automatic CI/CD, which is particularly advantageous in industry contexts. 
+
+\subsubsection{ContainerLab}
+
+% Outline containerlab, various topologies employed
+ContainerLab builds upon the containerisation technology which docker provides. It centers on Network Operating Systems which are commonly used commercially and for network testing and diagnostics. This provides a more realistic testing environment which reflects real-world networks. Furthermore, it also allows a wide range of possible configurations between multiple different nodes running different Network Operating Systems.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/lab_logical_diagram.png}
+    \caption{Example Lab logical diagram \cite{containerlab}}
+    \label{fig:lab_diagram_example}
+\end{figure}
+
+Configuration and management is controlled through a command-line interface (CLI), with the virtual topologies being defined straightforwardly in human readable YAML format. The topology is defined as "a set of nodes and links between them" \cite{containerlab}. Each of the nodes contains a kind to specify/control node behaviour, additionally each node also has an image link to the Network Operating System image to be loaded. The structure of the network is determined through a set of endpoints, expressing how each node is connected.
+
+\begin{figure}
+    \centering
+    \begin{lstlisting}
+name: srlceos01
+
+topology:
+  nodes:
+    srl:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux
+    ceos:
+      kind: arista_ceos
+      image: ceos:4.32.0F
+
+  links:
+    - endpoints: ["srl:e1-1", "ceos:eth1"]
+\end{lstlisting}
+    \caption{Example ContainerLab network topology defined in YAML file}
+    \label{fig:topology_yml}
+\end{figure}
+
+Upon deployment of the lab, the lifecycle can be managed through deploy, destroy, save, inspect and graph operations. Further increasing it's utilitiy and usability as a virtual network lab.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/ring_containerlab.png}
+    \caption{Containerlab network topology visualisation feature, showing a simple ring network structure.}
+    \label{fig:ring_container}
+\end{figure}
+
+\subsubsection{Alpine Linux}
+% Lightweight distro
+For the implemented virtual network lab, Alpine Linux has been used due to it's small size and resource efficiency. When installed on a container, it  requires a minimal 8 MB of space \cite{alpine}. However, this reduction of space overhead has a trade-off; an instance of this is that Apline uses a non-regular package manager called apk; this has proved to be problematic during creation of the network lab, due to lack of support to install the required network scanning libraries on containers to facilitate testing. 
+
+\subsection{Contemporary methods}
+
+\subsubsection{Original traceroute (Jacobson's)}
+
+\subsubsection{Paris traceroute}
+
+\subsubsection{Dublin traceroute (python bindings)}
+
+\subsection{Proposed Algorithms}
+
+\subsubsection{Zeph algorithm}
+
+\subsubsection{ MDA/MDA-lite}
+
+
+\subsection{Data Processing}
+
+\subsubsection{Pandas}
+
+\subsubsection{Matplotlib}

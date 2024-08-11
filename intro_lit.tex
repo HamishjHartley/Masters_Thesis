@@ -1,0 +1,161 @@
+\section{Introduction and Literature Review}
+%TODO:
+%Re-phrase introduction
+
+%Add analysis to MDA, D miner, Tokyo ping, zeph
+
+%Add discussion to possible work section
+
+
+%Introduction which sets the scene
+%for the research proposal and puts the research in context.
+\subsection{Introduction}
+The importance and impact of the internet over the past 30 years cannot be overstated; in almost every area it has dramatically changed the efficiency with which data can be transmitted and received across the globe. In order to facilitate such a large system, many millions of nodes are interlinked, which form network topologies. These all work together in tandem to send and receive "packets" of data. 
+
+A network topology is defined as the physical and logical layout of nodes and connections in a network, with nodes usually being either a router, switch or software emulating a switch or router. 
+
+Being able to map the topology of this structure is key not only to establish the most efficient routes for data transmission by reducing latency but also to ensure even traffic distribution across different network paths via Load balancing. There are also additional advantages of accurate mapping, which include mitigating potential security threats, fault detection and scalability. A common tool used to achieve this is Traceroute, with it being widely used, from the diagnosis of network
+problems to the assemblage of internet maps. \cite{anomalies} However the original Traceroute is very outdated, being released in 1989 \cite{jacobson1989traceroute} it was not built to match the modern complexities of internet networks. As such, several contemporary implementations built upon the principles of traceroute have been implemented, with the aim to address problems presented in modern networks such as NAT (Network Address Translation) and load-balancing. However, there is still room for further extensions and improvements to these contemporary methods, which will enable optimised network topology mapping. 
+
+\subsection{Literature Review}
+%Description and critical discussion of
+%research context relevant to the chosen
+%research context.
+
+%-------------------------------------------------------
+%Traceroute
+Jacobson's traceroute, released in 1989 was the \textit{de facto} tool used for network diagnostics and internet topology mapping.
+Traceroute returns the IP addresses of every node along a given path in a network topology, with the start and end point determined by the source and destination host in the IP packets.\cite{jacobson1989traceroute}
+
+However, traceroute is unable to detect if a given router or switch in the scanned network utilizes load balancing on packet header fields. This can be problematic, due to the wide usage of load balancing and lead to incorrect mapping of the network topology.\cite{anomalies}\cite{exhaustive}
+
+%-------------------------------------------------
+%Load balancing
+Load balancing is used to increase dependability and enhance resource usage. With intra-domain routing protocols OSPF\cite{moyospf} and IS-IS\cite{isis} being used to implement this. 
+
+By unitizing load balancing, network devices are able to send packets to many different equal cost paths. To assert how the traffic will be spread across the network network devices can use either a per packet, per flow or per destination policy. \cite{cisco}\cite{juniper} 
+
+%Analysis
+When load balancing in employed there is no single route from a source to a destination. A network device using per packet balancing is only concerned with maintaining a uniform load of packets, therefore it could send any given packet along any one of a selection of possible routes.\cite{anomalies}
+
+Although, with per-flow load balancing a single route is still used for packets of a given flow. Each packet is assigned to a flow using fields from the IP and TCP or UDP headers, ensuring that packets belonging to the same flow are dispatched and received in order. However, differing flows for the same source and destination pair can follow different possible routes.\cite{anomalies} 
+%----------------------------------------------------
+%Problems with traceroute
+As stated above, the original traceroute is insufficient to correctly recognize individual routes from a group of routes. This is due to how traceroute traverses routes in a network; it discovers hops along a route with a series of probe packets with increasing TTL, with each node in the network sending back an ICMP packet back in response. If these probe packets reach a router using load-balancing there is a possibility of the probe packets being directed along different paths, potentially resulting in missing nodes/links and false links as shown below in fig. \ref{figure:missing_node_fig}.
+
+\begin{figure}[!ht]
+  \begin{center}
+    \includegraphics[scale=0.3]{images/missing_nodes.png}
+    \caption{Missing nodes and links, and false links \cite{anomalies}}
+    \label{figure:missing_node_fig}
+  \end{center}
+\end{figure}
+
+
+%----------------------------------------------------
+%Different network topology types and their implications
+
+Due to the large prevalence of routers using Load balancing this is highly problematic, in response to this, new approaches have been proposed to mitigate the issue's highlighted above.
+%------------------------------------------------------
+
+
+%Paris trace route
+A modern variant of the original traceroute tool called Paris traceroute aims to address the problems posed by networks which employ load-balancing. It does this by manipulating the probe packet header fields, such that all probes follow the same path for per flow load balancing. However, due to probes being sent randomly in a network which uses per packet load balancing, Paris traceroute is unable to perfectly determine all paths in this instance. 
+Additionally, it can detect the type of load balancing is being utilized by the network. The can aid diagnostics and help flag instances of potentially wrong mapped routes. \cite{anomalies}
+
+\begin{figure}[!ht]
+  \begin{center}
+    \includegraphics[scale=0.3]{images/packet_header.png}
+    \caption{The roles played by packet header fields \cite{anomalies}}
+    \label{figure:packet_header_fig}
+  \end{center}
+\end{figure}
+
+%Analysis
+Paris traceroute is a much more robust tool to map internet topology than traceroute as it can mitigate the effects of per-flow load balancing and ensure packets flow on the correct path through the network nodes, avoiding potential missing nodes/links and false links. However, nodes which use Network Address Translation(NAT) can still be problematic for paris traceroute due to the NAT modifying the source/destination IP addresses in the packet headers, obscuring the packet information and also therefore the actual routing path. \cite{anomalies}
+
+%-------------------------------------------------------
+%MDA
+Further improvements have been made built upon the Paris traceroute tool such as the Multi path Detection Algorithm (MDA). The MDA "provides an extension to Paris traceroute called the MDA, a stochastic probing algorithm that adapts the number of
+probes to send on a hop-by-hop basis in order to enumerate all reachable interfaces at each hop". \cite{MDA2}
+
+%Analysis
+Rather than send a set amount of probes per hop like the original traceroute which sends 3, the MDA varies this amount based on a controllable parameter. \cite{MDA2} The parameter is the upper limit of the probability of not revealing the entire multi-path network. This is highly advantageous as it can adapt to any given network structure, which in the "real" internet can be extremely complex and have many paths, but also due to it's adaptability it can still remain relatively lightweight. However, as it is a stochastic algorithm there is an element of uncertainty to the produced result, this is accounted for by "yeilding" the  confidence of the final output to provide some further information about the validity of the result. \cite{MDA-lite}\cite{diamond-miner}\cite{MDA3}
+
+
+
+%Analysis
+MDA-lite is a further improvement on the MDA algorithm by reducing overhead, whilst still having the same performance. It achieves this by operating based on the assumption of uniform hops, with probes being sent at each hop without node control, although node control is still employed in specific cases. One flow identifier from each previously discovered vertex in the preceding hop are reused, this is then followed on with further previously used and new flow identifiers. MDA-lite acts on the premise that diamonds which are met during the network scan "will be uniform and un-meshed". \cite{MDA-lite} 
+
+Due to the possibility of these assumptions not actualizing; "MDA-lite tests for a lack of uniformity and the presence of meshing". \cite{MDA-lite} 
+
+If a scanned diamond is not consistent with the prior assumptions the MDA-lite reverts back to the original MDA algorithm. 
+
+\begin{figure}[!ht]
+  \begin{center}
+    \includegraphics[scale=0.3]{images/MDA_lite.png}
+    \caption{MDA-Lite versus MDA simulations\cite{MDA-lite}}
+    \label{figure:MDA_lite_fig}
+  \end{center}
+\end{figure}
+
+%-------------------------------------------------------
+%Diamond miner
+Another contemporary approach to map network topology is called Diamond Miner, "[it] is designed to capture Internet topology snapshots inclusive of all load-balanced paths". \cite{diamond-miner} Diamond miner utilises Yarrps's randomized and stateless probing, achieving wide coverage of internet topology. Yarrp enables high speed collection of network topology data, due to it's stateless operation and randomization of the probing order of the domain of network ranges and TTL of ICMP packets sent. \cite{yarrp}
+
+\begin{figure}[!ht]
+  \begin{center}
+    \includegraphics[scale=0.3]{images/yarrp.png}
+    \caption{Yarrp encodes information in the IP and TCP field of outgoing proe packets in order to permit stateless operation \cite{yarrp}}
+    \label{figure:yarrp_fig}
+  \end{center}
+\end{figure}
+
+Furthermore, it also incorporates probe set generation logic, which allows tracking of all outbound load-balanced edges from each node with a high certainty. The framework directs Yarrp through multiple iterations, until an adequate discovery level has been achieved for almost every node in the network. \cite{diamond-miner}
+
+\begin{figure}[!ht]
+  \begin{center}
+    \includegraphics[scale=0.3]{images/diamond.png}
+    \caption{Diamond miner high-level conceptual overview \cite{diamond-miner}}
+    \label{figure:dminer_overview_fig}
+  \end{center}
+\end{figure}
+
+%-------------------------------------------------------
+%Dublin traceroute
+Another modern tool inspired by the original Traceroute, and which builds upon the progress made by Paris traceroute is Dublin Traceroute. Dublin traceroute solves the NAT problem which was a limitation of paris-traceroute."Dublin Traceroute forges a custom IP ID in the outgoing packets, and keeps track of them in the response packets. If the response packet references an outgoing packet with different source/destination IP addresses and ports, this may indicate the presence of a NAT." \cite{dublin} \cite{dublin_website} 
+
+It is also implemented in C++ for it's core and has also improved on other limitations of Paris traceroute, namely it's memory safety \cite{dublin}, therefore increasing it's robustness. 
+
+Furthermore, it also offers a python library and interface as a wrapper on top of the C++ codebase. Results are exported as JSON data allowing ease of integration within other applications, adding to it's modularity and usability. \cite{dublin_website}
+
+
+%--------------------------
+% REVISED RESEARCH PROPOSAL UP UNTIL THIS POINT
+%
+
+
+%--------------------------------------------------------
+%Zeph map alogrithms
+%Analysis 
+By applying reinforcement learning for distributed tracing of network routes, the Zeph algorithmn discovers the probing directives to allocate to the vantages points in order to maximize topology discovery. 
+
+It follows a sequence of cycles, utilising positive feedback from previous cycles so as to re-enforce the learning process, whilst still trying new directives simultaneously. By using this approach, the total coverage should improve with each continual cycle. \cite{zephMap}
+
+%In order to optimise the hyper parameters of the algorithm as to achieve optimal coverage of the directed links, zeph uses the approach of 
+
+
+%----------------------------------
+%Clear links from the conclusions of
+%literature review to the research questions
+%presented in Section 2
+
+\subsection{Possible work}
+%Possible improvements which could be carried out for the project
+Based on the studied literature above there are several avenues of research which could be carried out to provide potentially fruitful results. Such as expanding upon the existing dublin traceroute implementation to include features such as the Multipath Detection Algorithm and zeph algorithm, and also support for TCP, ICMP and DNS probes in order to create the optimal traceroute tool which improves upon the previous tools such as traceroute and paris traceroute. With these improvements implemented, there could be scope to conduct an internet-wise topology survey as additional work for the project to provide supporting evidence of the additional features merit. 
+
+Furthermore, the MDA and zeph alogrithms could also be extended to IPv6 as their existing implementations only support IPv4. However this could prove to be time-comsuming due to IPv6's address size of 128-bits. 
+
+\newpage
+
+

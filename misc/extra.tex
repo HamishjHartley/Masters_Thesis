@@ -1,0 +1,66 @@
+\subsection{Possible work}
+%Possible improvements which could be carried out for the project
+
+%------Zeph Alogrithmn
+-In future work, we will extend Zeph to IPv6 and analyze in depth
+the dynamics of the internet topology
+
+%-----MDA algorithm
+-We see a number of possible extensions to the MDA. Better
+knowledge of the hashing functions used by per-flow load bal-
+ancers [4] should make it possible to reduce probing overhead,
+with the possibility to revert to the MDA in cases where no
+predictable pattern can be identified with high certainty. There
+is considerable scope for improving the current (loose) failure
+bound, thereby saving probes, and both the significance level
+and failure analyses open up new avenues for trading off and
+optimizing performance against probe budget. Another open
+question is how to accurately trace multipath routes past per-
+packet load balancers.
+
+%-----Diamond miner
+Our empirical data suggests that there are a set of load bal-
+anced architectures common to different provider types, for
+instance those deployed in data centers versus mobile opera-
+tors versus transit providers. We believe there is significant
+opportunity to develop a taxonomy of these common archi-
+tectures and classify results accordingly, as well as to identify
+previously unidentified load balanced architectures that are
+deployed in the wild. Comprehensive mapping of some of
+these topologies may require probing both from outside and
+within the provider’s network; we leave an exploration of e.g.,
+internal data center probing to future work.
+
+-Introduce more tracerouting strategies: at the moment it sends all the packets at once
+
+-send more than one packet per hop (traceroute sends 3 packets per hop) \textit{Could implement MDA/MDA lite in conjunction with dublin traceroute also maybe zeph alogrithm}
+
+-IPv6 probes in the C++ library (already implemented in the Go codebase)
+
+-support for TCP, ICMP, and DNS probes
+
+-add Path MTU Discovery to detect latencies introduced by fragmentation
+
+%Start of zeph alogrithm
+\SetKwInput{KwInput}{Input}  
+
+%Algorithm
+\begin{algorithm}[!ht]
+\DontPrintSemicolon
+  \KwInput{$\epsilon$ : Fraction of budget per agent reserved for exploration}
+  \For{i=1 to $\infty$}
+    {
+        $R_{i-1}$\gets ResultsFromPreviousCycle(Iris)
+        $A_i$\gets AgentsWithBudget(Iris)
+            \tcp*{Assign exploitation directives to agents $A_i$}
+        \If{sub-Condition}
+        {Do a lot}
+    }
+    \tcc{Now this is a While loop}
+   \While{Condition}
+   {
+   		Do something\;
+   }
+
+\caption{Zeph alogrithm}
+\end{algorithm}

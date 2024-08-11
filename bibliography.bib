@@ -1,0 +1,314 @@
+@article{zephMap,
+author = {Gouel, Matthieu and Vermeulen, Kevin and Mouchet, Maxime and Rohrer, Justin P. and Fourmaux, Olivier and Friedman, Timur},
+title = {Zeph \& Iris map the internet: A resilient reinforcement learning approach to distributed IP route tracing},
+year = {2022},
+issue_date = {January 2022},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {52},
+number = {1},
+issn = {0146-4833},
+url = {https://doi.org/10.1145/3523230.3523232},
+doi = {10.1145/3523230.3523232},
+abstract = {We describe a new system for distributed tracing at the IP level of the routes that packets take through the IPv4 internet. Our Zeph algorithm coordinates route tracing efforts across agents at multiple vantage points, assigning to each agent a number of /24 destination prefixes in proportion to its probing budget and chosen according to a reinforcement learning heuristic that aims to maximize the number of multipath links discovered. Zeph runs on top of Iris, our fault tolerant system for orchestrating internet measurements across distributed agents of heterogeneous probing capacities. Iris is built around third party free open source software and modern containerization technology, thereby presenting a new model for assembling a resilient and maintainable internet measurement architecture. We show that carefully choosing the destinations to probe from which vantage point matters to optimize topology discovery and that a system can learn which assignment will maximize the overall discovery based on previous measurements. After 10 cycles of probing, Zeph is capable of discovering 2.4M nodes and 10M links in a cycle of 6 hours, when deployed on 5 Iris agents. This is at least 2 times more nodes and 5 times more links than other production systems for the same number of prefixes probed.},
+journal = {SIGCOMM Comput. Commun. Rev.},
+month = {mar},
+pages = {2–9},
+numpages = {8},
+keywords = {active internet measurements, internet topology}
+}
+
+@inproceedings{anomalies,
+author = {Augustin, Brice and Cuvellier, Xavier and Orgogozo, Benjamin and Viger, Fabien and Friedman, Timur and Latapy, Matthieu and Magnien, Cl\'{e}mence and Teixeira, Renata},
+title = {Avoiding traceroute anomalies with Paris traceroute},
+year = {2006},
+isbn = {1595935614},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/1177080.1177100},
+doi = {10.1145/1177080.1177100},
+abstract = {Traceroute is widely used, from the diagnosis of network problems to the assemblage of internet maps. However, there are a few serious problems with this tool, in particular due to the presence of load balancing routers in the network. This paper describes a number of anomalies that arise in nearly all traceroute-based measurements. We categorize them as "loops", "cycles", and "diamonds". We provide a new publicly-available traceroute, called Paris traceroute, which controls packet header contents to obtain a more precise picture of the actual routes that packets follow. This new tool allows us to find conclusive explanations for some of the anomalies, and to suggest possible causes for others.},
+booktitle = {Proceedings of the 6th ACM SIGCOMM Conference on Internet Measurement},
+pages = {153–158},
+numpages = {6},
+keywords = {traceroute, load balancing},
+location = {Rio de Janeriro, Brazil},
+series = {IMC '06}
+}
+
+@inproceedings{exhaustive,
+author = {Augustin, Brice and Friedman, Timur and Teixeira, Renata},
+title = {Exhaustive path tracing with Paris traceroute},
+year = {2006},
+isbn = {1595934561},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/1368436.1368494},
+doi = {10.1145/1368436.1368494},
+abstract = {Traceroute [2] is used to learn the path between two machines in the internet. Uses range from the diagnosis of network problems to the assemblage of internet maps. Unfortunately, traceroute measurements can be inaccurate and incomplete when the measured route traverses a load balancer.},
+booktitle = {Proceedings of the 2006 ACM CoNEXT Conference},
+articleno = {49},
+numpages = {2},
+keywords = {load balancing, traceroute},
+location = {Lisboa, Portugal},
+series = {CoNEXT '06}
+}
+
+@article{moyospf,
+  title={Ospf version 2. RFC2328, April 1998},
+  author={Moy, John},
+  journal={URL: http://tools. ietf. org/html/rfc2328}
+}
+
+@techreport{isis,
+  title={Use of OSI IS-IS for routing in TCP/IP and dual environments},
+  author={Callon, Ross},
+  year={1990}
+}
+
+@misc{jacobson1989traceroute,
+  title={Traceroute ftp://ftp. ee. lbl. gov/traceroute. tar. gz},
+  author={Jacobson, V},
+  year={1989},
+  publisher={October}
+}
+
+@misc{cisco,
+author = {Cisco},
+title = {How does load balancing work?},
+howpublished = {Available at \url{http://www.cisco.com/en/US/tech/tk365/
+technologies tech note09186a0080094820.shtml}}
+}
+
+@misc{juniper,
+author = {Juniper},
+title = {Configuring load-balance per-packet action},
+howpublished = {Available at \url{http://www.juniper.net/techpubs/software/junos/junos70/
+swconfig70-policy/html/policy-actions-config11.html.}}
+}
+
+@misc{tcptraceroute,
+author={M. Toren},
+title={tcptraceroute},
+howpublished = {Available at \url{http://michael.toren.net/code/tcptraceroute/}}
+}
+
+@inproceedings{MDA-lite,
+author = {Vermeulen, Kevin and Strowes, Stephen D. and Fourmaux, Olivier and Friedman, Timur},
+title = {Multilevel MDA-Lite Paris Traceroute},
+year = {2018},
+isbn = {9781450356190},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3278532.3278536},
+doi = {10.1145/3278532.3278536},
+abstract = {Since its introduction in 2006--2007, Paris Traceroute and its Multipath Detection Algorithm (MDA) have been used to conduct well over a billion IP level multipath route traces from platforms such as M-Lab. Unfortunately, the MDA requires a large number of packets in order to trace an entire topology of load balanced paths between a source and a destination, which makes it undesirable for platforms that otherwise deploy Paris Traceroute, such as RIPE Atlas. In this paper we present a major update to the Paris Traceroute tool. Our contributions are: (1) MDA-Lite, an alternative to the MDA that significantly cuts overhead while maintaining a low failure probability; (2) Fakeroute, a simulator that enables validation of a multipath route tracing tool's adherence to its claimed failure probability bounds; (3) multilevel multipath route tracing, with, for the first time, a Traceroute tool that provides a router-level view of multipath routes; and (4) surveys at both the IP and router levels of multipath routing in the Internet, showing, among other things, that load balancing topologies have increased in size well beyond what has been previously reported as recently as 2016. The data and the software underlying these results are publicly available.},
+booktitle = {Proceedings of the Internet Measurement Conference 2018},
+pages = {29–42},
+numpages = {14},
+keywords = {Active Internet Measurements, Alias Resolution, Traceroute},
+location = {Boston, MA, USA},
+series = {IMC '18}
+}
+
+@inproceedings{diamond-miner,
+  title={$\{$Diamond-Miner$\}$: Comprehensive Discovery of the Internet's Topology Diamonds},
+  author={Vermeulen, Kevin and Rohrer, Justin P and Beverly, Robert and Fourmaux, Olivier and Friedman, Timur},
+  booktitle={17th USENIX Symposium on Networked Systems Design and Implementation (NSDI 20)},
+  pages={479--493},
+  year={2020}
+}
+
+@INPROCEEDINGS{MDA2,
+  author={Veitch, D. and Augustin, B. and Teixeira, R. and Friedman, T.},
+  booktitle={IEEE INFOCOM 2009}, 
+  title={Failure Control in Multipath Route Tracing}, 
+  year={2009},
+  volume={},
+  number={},
+  pages={1395-1403},
+  keywords={Probes;Load management;IP networks;Stochastic processes;Detection algorithms;Communications Society;Communication system control;Laboratories;Costs;Assembly},
+  doi={10.1109/INFCOM.2009.5062055}}
+
+@article{MDA3,
+  title={Modern Traceroute Variants and Adaptations},
+  author={Niedworok, Julius and Zirngibl, Johannes and Sattler, Patrick},
+  journal={network},
+  volume={4},
+  pages={5}
+}
+
+@article{dublin,
+  title={Visualizing multipath networks with dublin traceroute},
+  author={Barbeiro, Andrea},
+  journal={Presentation at the MOCA Italian hacker camp},
+  year={2016}
+}
+
+@inproceedings{toykoPing,
+  title={From Paris to Tokyo: On the suitability of ping to measure latency},
+  author={Pelsser, Cristel and Cittadini, Luca and Vissicchio, Stefano and Bush, Randy},
+  booktitle={Proceedings of the 2013 conference on Internet measurement conference},
+  pages={427--432},
+  year={2013}
+}
+
+@inproceedings{yarrp,
+  title={Yarrp'ing the Internet: Randomized high-speed active topology discovery},
+  author={Beverly, Robert},
+  booktitle={Proceedings of the 2016 Internet Measurement Conference},
+  pages={413--420},
+  year={2016}
+}
+
+@inproceedings{yarrp2,
+  title={In the IP of the beholder: Strategies for active IPv6 topology discovery},
+  author={Beverly, Robert and Durairajan, Ramakrishnan and Plonka, David and Rohrer, Justin P},
+  booktitle={Proceedings of the Internet Measurement Conference 2018},
+  pages={308--321},
+  year={2018}
+}
+
+@misc{dublin_website,
+author = {Andrea Barberio},
+title = {Dublin-Traceroute},
+howpublished = {Available at \url{https://dublin-traceroute.net/} }
+}
+
+@misc{containerlab ,
+author = {Containerlab Team},
+title = {ContainerLab},
+howpublished = {https://containerlab.dev/}
+}
+
+@INPROCEEDINGS{alpine,
+  author={Fava, Felipe Bedinotto and Laviola Leite, Luiz Felipe and Da Silva, Luís Fernando Alves and Da Silva Amalfi Costa, Pedro Ramires and Diniz Nogueira, Angelo Gaspar and Gobus Lopes, Amanda Fagundes and Schepke, Claudio and Kreutz, Diego Luis and Mansilha, Rodrigo Brãndao},
+  booktitle={2024 32nd Euromicro International Conference on Parallel, Distributed and Network-Based Processing (PDP)}, 
+  title={Assessing the Performance of Docker in Docker Containers for Microservice-Based Architectures}, 
+  year={2024},
+  volume={},
+  number={},
+  pages={137-142},
+  keywords={Linux;Memory management;Microservice architectures;Containers;Benchmark testing;Reproducibility of results;Libraries;Docker in Docker;DinD;Docker Containers;Nested-container;Performance Evaluation;Benchmarks;Cloud Computing},
+  doi={10.1109/PDP62718.2024.00026}}
+
+@INPROCEEDINGS{VirtualWare,
+  author={Ionescu, Valeriu Manuel and Patel, Manan and Hindocha, Drashti},
+  booktitle={2019 11th International Conference on Electronics, Computers and Artificial Intelligence (ECAI)}, 
+  title={Alternatives for Running Linux Applications in Windows}, 
+  year={2019},
+  volume={},
+  number={},
+  pages={1-4},
+  keywords={VirtualBox;Docker;Windows Linux Subsystem;Cygwin;performance},
+  doi={10.1109/ECAI46879.2019.9042127}}
+
+
+@misc{oracleVM,
+  title={https://www.virtualbox.org/},
+  author={Oracle},
+  year={2023},
+  publisher={Oracle}
+}
+
+@misc{docker.com,
+  title={https://www.docker.com/},
+  author={Docker},
+  year={2024},
+  publisher={Docker Inc.}
+}
+
+
+@misc{docker_isolate,
+  title={https://docs.docker.com/v17.12/engine/security/userns-remap},
+  author={Docker},
+  year={2024},
+  publisher={Docker Inc.}
+}
+
+@misc{apline,
+  title={https://alpinelinux.org},
+  author={Alpine Linux Development Team},
+  year={2024},
+  publisher={Alpine Linux Development team}
+}
+
+@INPROCEEDINGS{ring_network,
+  author={Zhou, Zitao and Wang, Yongli},
+  booktitle={2019 IEEE 5th International Conference on Computer and Communications (ICCC)}, 
+  title={An Improved Routing Algorithm on Complex Multi-ring Network Topology}, 
+  year={2019},
+  volume={},
+  number={},
+  pages={332-336},
+  keywords={Network topology;Topology;Structural rings;Routing;Nuclear magnetic resonance;Delays;Optical fiber communication;multi-ring network;routing algorithm;optimal path;large-scale network},
+  doi={10.1109/ICCC47050.2019.9064054}}
+
+@INPROCEEDINGS{star_zig,
+  author={Bhumika and Kumar, Mukesh and Singh, Sudhir Narayan and Taneja, Bhanuj},
+  booktitle={2015 Fifth International Conference on Advanced Computing & Communication Technologies}, 
+  title={Relative Study of Zig-Bee/IEEE 802.15.4 WPAN Performance under Different Topologies}, 
+  year={2015},
+  volume={},
+  number={},
+  pages={415-420},
+  keywords={Network topology;Topology;Throughput;Wireless personal area networks;IEEE 802.15 Standards;Mesh networks;Wireless sensor networks;Base station;IEEE 802.15.4;node/device;star topology;mesh topology;tree topology;Zig-Bee coordinator (ZC);Zig-Bee router (ZR);Zig-Bee end devices (ZEDs)},
+  doi={10.1109/ACCT.2015.129}}
+
+@INPROCEEDINGS{tree_nature,
+  author={Kromer, J.; Khaledi-Nasab, A; Schimansky-Geier, L.; Neiman},
+  booktitle={Scientific Reports, 7.}, 
+  title={Emergent stochastic oscillations and signal detection in tree networks of excitable elements}, 
+  year={2017},
+  volume={},
+  number={},
+  pages={},
+  keywords={},
+  doi={10.1038/s41598-017-04193-8}}
+
+@book{tree_book,
+    author = {Bradley, Ray},
+    title = {Understanding Computer Science (for Advanced Level): The Study Guide.},
+    publisher = {Nelson Thornes},
+    address = {Cheltenham},
+    year = {2001}
+}
+
+@INPROCEEDINGS{Qos_simulation,
+  author={Yoo, Hyeong Seon and Yu, William Emmanuel S.},
+  booktitle={2022 International Conference on Engineering and Emerging Technologies (ICEET)}, 
+  title={Building a QoS Testing Framework for Simulating Real-World Network Topologies in a Software-defined Networking Environment}, 
+  year={2022},
+  volume={},
+  number={},
+  pages={1-6},
+  keywords={Network topology;Quality of service;Benchmark testing;Hardware;Topology;Behavioral sciences;Servers;network modelling;software-defined networks;QoS;network topology;Internet Topology Zoo},
+  doi={10.1109/ICEET56468.2022.10007108}}
+
+@article{Erdos_renyi_origin,
+  added-at = {2017-10-20T13:47:06.000+0200},
+  author = {Erd\"os, P and R\'enyi, A},
+  biburl = {https://www.bibsonomy.org/bibtex/2420b83c1533188c0b54bd1f6eea2b782/krevelen},
+  interhash = {99061fc859ba540d4485abfbce44f298},
+  intrahash = {420b83c1533188c0b54bd1f6eea2b782},
+  journal = {Publicationes Mathematicae Debrecen},
+  keywords = {epidemes},
+  pages = {290--297},
+  timestamp = {2017-10-20T13:47:26.000+0200},
+  title = {On Random Graphs I},
+  volume = 6,
+  year = 1959
+}
+
+@article{Albert_barabasi_2002,
+   title={Statistical mechanics of complex networks},
+   volume={74},
+   ISSN={1539-0756},
+   url={http://dx.doi.org/10.1103/RevModPhys.74.47},
+   DOI={10.1103/revmodphys.74.47},
+   number={1},
+   journal={Reviews of Modern Physics},
+   publisher={American Physical Society (APS)},
+   author={Albert, Réka and Barabási, Albert-László},
+   year={2002},
+   month=jan, pages={47–97} }
