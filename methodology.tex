@@ -45,7 +45,7 @@ A bus topology comprises of nodes which are directly connected to a shared link,
 A star topology comprises of a central node, with terminal nodes radially connected outwards. In order for data to be transferred  between the terminal nodes in the network, it must pass through the central node, thus much like the bus topology, direct data transfer between the terminal nodes is not possible. \cite{star_zig} Due to the independent connection of each node to the central node, the topology is relatively fault tolerant as one link braking will not impact the other connections in the network. Furthermore, should a potential fault occur, it can be more readily dealt with, due to the increased ability to identify and distinguish sources of problems in the network. Star topologies are commonly found across many different use-cases and contexts; such as a  home network, where each device is directly and independently connected to a centralised router/hub. 
 
 \subsubsection{Mesh topology}
-Mesh topologies are composed of nodes which are connected directly and non-hierarchically to one another. They can be classified as either partially connected or fully connected, whereby nodes are partly connected and fully connected respectively to form a "mesh" structure. Due to the mutual connections between every node in the network, there is a lack of dependancy
+Mesh topologies are composed of nodes which are connected directly and non-hierarchically to one another. They can be classified as either partially connected or fully connected, whereby nodes are partly connected and fully connected respectively to form a "mesh" structure. Due to the mutual connections between every node in the network, there is a lack of dependancy on any particular node or connection. The mutual connectivity between each/many of the nodes in a mesh topology makes it fault-tolerant and also allows on-the-fly distribution of load on the network. \cite{mesh_paper}
 
 \subsubsection{Tree topology}
 A tree topology is a form of hybrid network topology, it consists of both star and bus networks. It is composed of star networks connected together through a shared bus network. \cite{tree_book} Furthermore, due to the characteristics of it's component topologies, star and bus, the tree topology is well suited to be used for networks that span "large geographical areas" \cite{Qos_simulation}. 
@@ -67,8 +67,54 @@ Hybrid topologies are composed of multiple varying simple topologies which combi
 
 Real world examples of hybrid network topologies include a University campus intranet or in an enterprise context. 
 
+\subsection{Real-world topologies}
+\subsubsection{Topology zoo}
+"[The] Internet Topology Zoo is a store of network
+data created from the information that network operators make
+public." \cite{topology_zoo} The Internet Topology Zoo is a project carried out at the University of Adelaide by Knight et al, aiming to create an accurate database of real-world network topologies from publicly available information. It has the distinction of not being measured by network scanning tools such as traceroute \cite{jacobson1989traceroute}, therefore it avoids the potential innacuracies which using these tools can entail. Furthermore, due to the information being gathered using this approach, many of the topologies stored in the database have additional metadata. This provides not only a more rich and descriptive abstraction of network structures but can also enable discovery of further topologies. 
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/real-world/GEANT_2012.jpg}
+    \caption{GEANT (2012) \cite{topology_zoo}}
+    \label{fig:GEANT}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/real-world/Janetbackbone_2011.jpg}
+    \caption{Janet Backbone (2011) \cite{topology_zoo}}
+    \label{fig:janet_backbone}
+\end{subfigure}
+\caption{Example Backbone primary networks from the Internet Topology Zoo database}
+\label{fig:test}
+\end{figure}
+
+Topologies are not only visualised but also captured in the GML graph exchange format, enabling straightforward processing of the topologies in a scripting language such as python. 
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/real-world/geant_plot.png}
+    \caption{GEANT (2012) \cite{topology_zoo}}
+    \label{fig:GEANT_plot}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/real-world/janet_plot.png}
+    \caption{Janet Backbone (2011) \cite{topology_zoo}}
+    \label{fig:janet_backbone_plot}
+\end{subfigure}
+\caption{GEANT and Janet Backbone topologies imported and plotted directly using python}
+\label{fig:test}
+\end{figure}
+
+By analysing and evaluating contemporary network scanning tools on simulated models of real-world networks, meaningful conclusions can be drawn from experimental results. The practical application of these tools will be tested, in the  environment they were intended to be used for. Furthermore, with a wide variety of different real-world topologies are available through the Internet Topology zoo, extensive and exhaustive testing can be carried out. 
+
 \subsection{Stochastic topologies}
-With the aim to implement randomly generated network topologies for the purpose of evaluation in the virtual network lab, a framework is proposed. Firstly the individual parameters which are involved in the creation of a network topology structure must be identified. 
+With the aim to implement randomly generated network topologies for the purpose of evaluation in the virtual network lab, several frameworks are proposed.
 
 \subsubsection{Basic approach}
 Following an elementary approach which is concerned with the basic 'building-blocks' of a network topology, one can identify these as the number of nodes, the number of links each node has, the origin node and target node of each link. 
@@ -323,15 +369,26 @@ Upon deployment of the lab, the lifecycle can be managed through deploy, destroy
 % Lightweight distro
 For the implemented virtual network lab, Alpine Linux has been used due to it's small size and resource efficiency. When installed on a container, it  requires a minimal 8 MB of space \cite{alpine}. However, this reduction of space overhead has a trade-off; an instance of this is that Apline uses a non-regular package manager called apk; this has proved to be problematic during creation of the network lab, due to lack of support to install the required network scanning libraries on containers to facilitate testing. 
 
-\subsection{Contemporary methods}
+\subsubsection{Virtual network pipeline}
+As previously mentioned, to facilitate simulation of the randomly generated network topologies, the generated structures could be parsed into the YAML format required for containerlab to deploy virtual networks. Implementation of a seamless "pipeline" is of great benefit as it allows modular steps in the creation of the network lab to be connected linearly, allowing straightforward configuration and control of each step in the process. Furthermore, it also has the additional benefit of being more extensible and resilient to bugs and anomalies as these can be isolated at specific stages in the pipeline. An additional benefit is ease of use, should the framework be adopted in the future for further research. Below, a framework is proposed with the aim of accomplishing this; from the initial generation of network topologies to the simulation and evaluation of them using configurable contemporary methods. 
+
+topology generation $\Rightarrow$ parsing to YML $\Rightarrow$ deployment of containerlab environment $\Rightarrow$ selection of network scanning method $\Rightarrow$ running scan on deployed topology $\Rightarrow$ evaluating scan using configurable metric 
+
+To facilitate simulation of real-world topologies from the Internet Topology Zoo dataset, a similar pipeline is proposed. In which the GML graph files are parsed to YML format, which are then deployed using containerlab, continuing onto be scanned using a chosen scanning method and evaluated using a configurable metric.  
+
+Topology selection from Dataset $\Rightarrow$ parsing to YML $\Rightarrow$ deployment of containerlab environment $\Rightarrow$ Selection of scanning method $\Rightarrow$ running scan on deployed topology $\Rightarrow$ evaluating scan using configurable metric 
+
+\subsection{Network scanning methods}
+Below, the performance on both real-world and randomly generated topologies will be outlined for each network scanning tool. 
 
 \subsubsection{Original traceroute (Jacobson's)}
 
 \subsubsection{Paris traceroute}
 
-\subsubsection{Dublin traceroute (python bindings)}
+\subsubsection{Dublin traceroute}
 
 \subsection{Proposed Algorithms}
+Below, the proposed algorithms Zeph and MDA are outlined and described. They are suggested as possible extensions to the Dublin-traceroute tool to improve it's performance.  
 
 \subsubsection{Zeph algorithm}
 
