@@ -305,11 +305,18 @@ Initially the network starts with a network of $m_0$ nodes, at each step a new n
 \end{algorithmic}
 \end{algorithm}
 
-\subsubsection{Proposed Implementation}
+\subsubsection{Python Implementation}
 Each of these approaches could be facilitated by implementing them in python to create custom topology definition files in such a way which can then be parsed by containerlab to deploy and host the topologies virtually. 
-The python library networkx has stochastic graph generating functions which can implement the Erdos-Renyl and Barabasi-Albert models, reducing overall development time and ensuring accurate and efficient code. 
+The python library networkx \cite{networkX} has stochastic graph generating functions which can implement the Erdos-Renyl and Barabasi-Albert models, reducing overall development time and ensuring accurate and efficient code. 
 
 \subsection{Virtual Lab implementation}
+
+\subsubsection{NetworkX}
+%Describe framework
+
+%Modules used from framework
+
+%Code excerpt
 
 \subsubsection{Oracle VM VirtualBox}
 % Virtual environment allows greater portability
@@ -378,6 +385,13 @@ To facilitate simulation of real-world topologies from the Internet Topology Zoo
 
 Topology selection from Dataset $\Rightarrow$ parsing to YML $\Rightarrow$ deployment of containerlab environment $\Rightarrow$ Selection of scanning method $\Rightarrow$ running scan on deployed topology $\Rightarrow$ evaluating scan using configurable metric 
 
+% Create diagrams for each step in pipeline, with accomanying code to go with each step. 
+
+\subsubsection{Proposed topologies}
+6 topologies are proposed to be used to evaluate each of the network scanning methods, with 3 being randomly generated and 3 being from real-world topologies. Each topology has been selected from larger topology sets as outline in previous sections, with the intention of providing a diverse range of structures with which to test the scanning tools. This approach does have limitations however, including selection bias, and a relatively small number of test-cases. 
+
+%compare the generated networks and real-world networks r value, as a measure of correlation and therefore relavance in testing the network scanning tools
+
 \subsection{Network scanning methods}
 Below, the performance on both real-world and randomly generated topologies will be outlined for each network scanning tool. 
 
@@ -392,8 +406,56 @@ Below, the proposed algorithms Zeph and MDA are outlined and described. They are
 
 \subsubsection{Zeph algorithm}
 
+\begin{algorithm}
+\caption{Zeph Algorithm}\label{alg:zeph}
+\begin{algorithmic}[1]
+\State \textbf{Input:} Graph $G(V, E)$, source node $s$, destination node $t$
+\State \textbf{Output:} Shortest path from $s$ to $t$
+\State Initialize priority queue $Q$ and set $Q = \{(s, 0)\}$
+\State Initialize distance vector $D$ with $D[s] = 0$ and $D[v] = \infty$ for all $v \neq s$
+\While{$Q$ is not empty}
+    \State Extract $(u, d_u)$ from $Q$ with the smallest $d_u$
+    \If{$u == t$}
+        \State \textbf{return} $D[t]$
+    \EndIf
+    \For{each neighbor $v$ of $u$}
+        \State Calculate tentative distance $d_{tentative} = d_u + w(u, v)$
+        \If{$d_{tentative} < D[v]$}
+            \State Update $D[v] = d_{tentative}$
+            \State Insert $(v, D[v])$ into $Q$
+        \EndIf
+    \EndFor
+\EndWhile
+\State \textbf{return} $D[t]$ \Comment{If $t$ is unreachable, $D[t]$ will be $\infty$}
+\end{algorithmic}
+\end{algorithm}
+
 \subsubsection{ MDA/MDA-lite}
 
+DOUBLE CHECK THIS
+\begin{algorithm}
+\caption{MDA: Modularity Density Algorithm}\label{alg:mda}
+\begin{algorithmic}[1]
+\State \textbf{Input:} Graph $G(V, E)$, modularity parameter $\gamma$
+\State \textbf{Output:} Optimal community structure $C$
+\State Initialize community structure $C_0$ with each node in its own community
+\State Initialize modularity density $\Delta Q = 0$
+
+\Repeat
+    \State Calculate the modularity density $\Delta Q$ for current community structure $C$
+    \For{each node $i \in V$}
+        \State Compute the potential gain in modularity density by moving node $i$ to a neighboring community
+        \If{gain in $\Delta Q > 0$}
+            \State Move node $i$ to the community that provides the maximum increase in $\Delta Q$
+        \EndIf
+    \EndFor
+\Until{no further improvement in modularity density is possible}
+
+\State \textbf{Output} the community structure $C$ that maximizes modularity density $\Delta Q$
+\end{algorithmic}
+\end{algorithm}
+
+\newpage
 
 \subsection{Data Processing}
 
