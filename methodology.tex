@@ -309,14 +309,55 @@ Initially the network starts with a network of $m_0$ nodes, at each step a new n
 Each of these approaches could be facilitated by implementing them in python to create custom topology definition files in such a way which can then be parsed by containerlab to deploy and host the topologies virtually. 
 The python library networkx \cite{networkX} has stochastic graph generating functions which can implement the Erdos-Renyl and Barabasi-Albert models, reducing overall development time and ensuring accurate and efficient code. 
 
+\subsection{Generated and Real-world Topologies comparison}
+To verify the validity of the generated topologies they will be compared with real-world topologies found from the Internet Topology Zoo database. Furthermore, this will be used as the basis of selection from the different topology generation methods mentioned previously. The correlation between them will be measured in several different ways to ensure a rigorous and comprehensive approach.
+
+\subsubsection{Graph Isomorphism}
+Given two graphs 
+
+\begin{equation}
+    (u,v) \in E_1 \Leftrightarrow (f(u),f(v)) \in E_2
+\end{equation}
+
+\subsubsection{Degree Correlation}
+
+\begin{equation}
+    r = \frac{\sum(x_i - \hat{x})(y_i-\hat{y}}{\sqrt{\sum}(x_i-\hat{x})^2\sum(y_i-\hat{y})^2}
+\end{equation}
+
+
+%\subsubsection{Spectral Comparison}
+%\subsubsection{Clustering Coefficient Comparison}
+
+\subsubsection{Distribution of shortest path lengths}
+
+
+\begin{figure}
+\centering
+\includegraphics[width=.3\textwidth]{images/topo_comparison/janet1.png}\hfill
+\includegraphics[width=.3\textwidth]{images/topo_comparison/janet2.png}\hfill
+\includegraphics[width=.3\textwidth]{images/topo_comparison/janet3.png}
+\caption{Shortest Path comparison between ER, BA and real-world Janet Backbone topology}
+\label{fig:shortest_path_comp}
+\end{figure}
+
+
 \subsection{Virtual Lab implementation}
 
 \subsubsection{NetworkX}
 %Describe framework
+NetworkX is a python library which is designed to be used for the "creation, manipulation, and study of the structure dynamics, and functions of complex networks." \cite{networkX} Due to it's extensive functionality, utilising this library for the evaluation and processing of graph topologies increases the speed and ease with which it can be carried out. Furthermore, as a consequence of it's robust implementation and over 90\% test coverage of it's code-base, results yielded utilising this library are highly trustworthy. 
 
 %Modules used from framework
+For the generation of random graph topologies, namely Erdos-Renyi and Barabasi-Albert, the corresponding modules are used; \newline
+\verb|erdos_renyi_graph(n, p, seed=None, directed=False)| 
+\verb|barabasi_albert_graph(n, m, seed=None, initial_graph=None)| 
 
+For the comparison between the various topologies the following modules were used; \newline 
+\verb|all_pairs_shortest_path_length(G, cutoff=None)|
 %Code excerpt
+
+
 
 \subsubsection{Oracle VM VirtualBox}
 % Virtual environment allows greater portability
@@ -396,6 +437,8 @@ Topology selection from Dataset $\Rightarrow$ parsing to YML $\Rightarrow$ deplo
 Below, the performance on both real-world and randomly generated topologies will be outlined for each network scanning tool. 
 
 \subsubsection{Original traceroute (Jacobson's)}
+
+
 
 \subsubsection{Paris traceroute}
 
