@@ -330,7 +330,7 @@ Given two graphs
 %\subsubsection{Clustering Coefficient Comparison}
 
 \subsubsection{Distribution of shortest path lengths}
-
+The shortest path length of a given graph $G = (V,E)$, where $V$ is the set of $|V|=N$ nodes and $E$ is the set of $|E|=M$ edges, is defined as "The number of edges on the shortest path from i to j is the shortest path length ($s'$) of that path. The $s'$ is a number associated with the pair $i-j$: for each pair $i-j$ there is one and only one $s':s'(i,j)$"\cite{santos2022shortestpathpathlength} 
 
 \begin{figure}
 \centering
@@ -346,7 +346,7 @@ Given two graphs
 
 \subsubsection{NetworkX}
 %Describe framework
-NetworkX is a python library which is designed to be used for the "creation, manipulation, and study of the structure dynamics, and functions of complex networks." \cite{networkX} Due to it's extensive functionality, utilising this library for the evaluation and processing of graph topologies increases the speed and ease with which it can be carried out. Furthermore, as a consequence of it's robust implementation and over 90\% test coverage of it's code-base, results yielded utilising this library are highly trustworthy. 
+NetworkX is a python library which is designed to be used for the "creation, manipulation, and study of the structure dynamics, and functions of complex networks." \cite{networkX} Due to it's extensive functionality, utilising this library for the evaluation and processing of graph topologies increases the speed and ease with which it can be carried out. Furthermore, as a consequence of it's robust implementation and over 90\% test coverage of it's code-base, results yielded from code utilising this library are highly trustworthy. 
 
 %Modules used from framework
 For the generation of random graph topologies, namely Erdos-Renyi and Barabasi-Albert, the corresponding modules are used; \newline
@@ -427,6 +427,84 @@ To facilitate simulation of real-world topologies from the Internet Topology Zoo
 Topology selection from Dataset $\Rightarrow$ parsing to YML $\Rightarrow$ deployment of containerlab environment $\Rightarrow$ Selection of scanning method $\Rightarrow$ running scan on deployed topology $\Rightarrow$ evaluating scan using configurable metric 
 
 % Create diagrams for each step in pipeline, with accomanying code to go with each step. 
+
+\begin{figure}
+    \centering
+    \begin{lstlisting}
+#Parse to YML 
+def parse_to_yml(graph : nx.graph, image, kind):
+
+    #Define output file name
+    output_file = "output_topology.yaml"
+
+    #Define topology as a dictionary
+    topology = OrderedDict({
+        "name": "output_topology",
+        "topology": OrderedDict({
+            "nodes": OrderedDict(),
+            "links": []
+        })
+    })
+
+    #Adding definitions to each node in topology
+    for node,i in enumerate(graph.nodes):
+        topology["topology"]["nodes"][f"node{node}"] = {
+            "kind" : kind,
+            "image" : image,
+        } 
+
+        #Creating links between the nodes
+    for edge in graph.edges:
+        topology["topology"]["links"].append({
+            "endpoints" : [f"node{edge[0]}:eth1", f"node{edge[1]}:eth1"]
+        })
+
+    #Parse topology to YAML file
+    with open(output_file, 'w') as yaml_file:
+        yaml.dump(topology, yaml_file, default_flow_style=False)
+
+
+\end{lstlisting}
+    \caption{Python function to parse graph topology to YAML file which can be read by containerlab and used to deploy simulated virtual network topology}
+    \label{fig:python_parse_function}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{lstlisting}
+name: output_topology
+topology:
+  nodes:
+    node0:
+      image: ghcr.io/nokia/srlinux
+      kind: srl
+    node1:
+      image: ghcr.io/nokia/srlinux
+      kind: srl
+    node2:
+      image: ghcr.io/nokia/srlinux
+      kind: srl
+    node3:
+      image: ghcr.io/nokia/srlinux
+      kind: srl
+  links:
+  - endpoints:
+    - node0:eth1
+    - node1:eth1
+  - endpoints:
+    - node0:eth1
+    - node2:eth1
+  - endpoints:
+    - node0:eth1
+    - node3:eth1
+  - endpoints:
+    - node1:eth1
+    - node3:eth1
+\end{lstlisting}
+    \caption{Example resultant YAML file using parse_to_yml() function}
+    \label{fig:parse_topo_example_yml}
+\end{figure}
+
 
 \subsubsection{Proposed topologies}
 6 topologies are proposed to be used to evaluate each of the network scanning methods, with 3 being randomly generated and 3 being from real-world topologies. Each topology has been selected from larger topology sets as outline in previous sections, with the intention of providing a diverse range of structures with which to test the scanning tools. This approach does have limitations however, including selection bias, and a relatively small number of test-cases. 
