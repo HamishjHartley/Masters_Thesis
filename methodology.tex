@@ -114,8 +114,7 @@ Topologies are not only visualised but also captured in the GML graph exchange f
 By analysing and evaluating contemporary network scanning tools on simulated models of real-world networks, meaningful conclusions can be drawn from experimental results. The practical application of these tools will be tested, in the  environment they were intended to be used for. Furthermore, with a wide variety of different real-world topologies are available through the Internet Topology zoo, extensive and exhaustive testing can be carried out. 
 
 \subsection{Stochastic topologies}
-With the aim to implement randomly generated network topologies for the purpose of evaluation in the virtual network lab, several frameworks are proposed.
-
+With the aim to implement randomly generated network topologies for the purpose of evaluation in the virtual network lab, several frameworks are discussed below.
 \subsubsection{Basic approach}
 Following an elementary approach which is concerned with the basic 'building-blocks' of a network topology, one can identify these as the number of nodes, the number of links each node has, the origin node and target node of each link. 
 
@@ -253,7 +252,7 @@ A the model is probabilistic, the parameter $p$ exists on the range 0 to 1; intu
     \label{fig:20,30,40}
 \end{figure}
 
-For the purposes of network topology generation, the G(n,M) is the most straightforward implement. Due to the every node in the network having at least one link to another node, avoiding unconnected nodes and separated networks. However, one way to circumvent these potential issues would be to prune the outlying nodes and keep the largest network. 
+For the purposes of network topology generation, the G(n,M) is the seemingly obvious choice between both variants. This is due to every node in the network having at least one link to another node, avoiding unconnected nodes and separated networks. However, ensuring a sufficiently high enough $p$ value, and number of nodes,$n$,  the resultant networks from the $G(n,P)$ model are much more closely correlated with real-world topologies structurally. Making them preferrable to use for evaluation of the network scanning tools.
 
 \subsubsection{Barabasi-Albert Model}
 
@@ -262,10 +261,11 @@ The Barabasi-Albert models is an algorithm which  produces random scale-free net
 
 Initially the network starts with a network of $m_0$ nodes, at each step a new node is added with $m$ edges which link it to $m$ different nodes. The probability that a new node will connect to an existing node $i$ is given by \ref{eq:3}, where $k_i$ is the degree of node $i$, and the sum is over all existing nodes $j$. \cite{Albert_barabasi_2002} 
 
-
 \begin{equation} \label{eq:3}
     p_i = \frac{k_i}{\Sigma_jk_j}
 \end{equation}
+
+As a consequence of this, the higher the number of links that a node has in a topology generated through the Barabasi-Albert method, the higher the likelihood that that same node will receive more new links. The same pattern occurs across many different real-world networks, such as the world wide web and social networks; whereby well-known websites and people which are both highly connected are more likely to be connected to a new website or person than a less connected person or website.  
 
 \begin{figure}
     \centering
@@ -274,90 +274,42 @@ Initially the network starts with a network of $m_0$ nodes, at each step a new n
     \label{fig:BA_9}
 \end{figure}
 
-\begin{algorithm}
-\caption{Barabási-Albert (BA) Model Algorithm}\label{alg:BA}
-\begin{algorithmic}[1]
-\State \textbf{Input:} Initial number of nodes $m_0$, number of edges to attach $m \leq m_0$, total number of nodes $N$
-\State \textbf{Output:} Scale-free network with $N$ nodes
-\State
-
-\State \textbf{Step 1:} \textbf{Initialization}
-\State Create an initial network with $m_0$ nodes and connect every node to every other node (complete graph).
-
-\State \textbf{Step 2:} \textbf{Growth}
-\For{$i = m_0 + 1$ to $N$}
-    \State Add a new node $i$ with $m$ edges.
-    \State Connect the new node $i$ to $m$ existing nodes chosen with probability proportional to their degree.
-    \For{each existing node $j$}
-        \State Calculate the probability $\Pi(j)$ that node $i$ connects to node $j$:
-        \[
-        \Pi(j) = \frac{k_j}{\sum_{l} k_l}
-        \]
-        where $k_j$ is the degree of node $j$ and the sum is over all existing nodes $l$.
-    \EndFor
-\EndFor
-
-\State \textbf{Step 3:} \textbf{Repeat}
-\State Repeat the growth process until the network contains $N$ nodes.
-
-\State \textbf{Step 4:} \textbf{Output the network}
-\State Return the generated scale-free network.
-\end{algorithmic}
-\end{algorithm}
 
 \subsubsection{Python Implementation}
 Each of these approaches could be facilitated by implementing them in python to create custom topology definition files in such a way which can then be parsed by containerlab to deploy and host the topologies virtually. 
 The python library networkx \cite{networkX} has stochastic graph generating functions which can implement the Erdos-Renyl and Barabasi-Albert models, reducing overall development time and ensuring accurate and efficient code. 
 
 \subsection{Generated and Real-world Topologies comparison}
-To verify the validity of the generated topologies they will be compared with real-world topologies found from the Internet Topology Zoo database. Furthermore, this will be used as the basis of selection from the different topology generation methods mentioned previously. The correlation between them will be measured in several different ways to ensure a rigorous and comprehensive approach.
+To verify the suitability of the methods used to generate the stochastic topologies, they will be compared with the real-world topologies found from the Internet Topology Zoo database using the distribution of the shortest path length to ensure a rigorous and comprehensive approach. Furthermore, the results of this comparison will be used as the basis of selection from the different topology generation methods mentioned previously. The most closely correlated model will be selected and used to implement the final network topologies in the virtual network lab.
 
-\subsubsection{Graph Isomorphism}
-Given two graphs 
-
-\begin{equation}
-    (u,v) \in E_1 \Leftrightarrow (f(u),f(v)) \in E_2
-\end{equation}
-
-\subsubsection{Degree Correlation}
-
-\begin{equation}
-    r = \frac{\sum(x_i - \hat{x})(y_i-\hat{y}}{\sqrt{\sum}(x_i-\hat{x})^2\sum(y_i-\hat{y})^2}
-\end{equation}
-
-
-%\subsubsection{Spectral Comparison}
-%\subsubsection{Clustering Coefficient Comparison}
 
 \subsubsection{Distribution of shortest path lengths}
 The shortest path length of a given graph $G = (V,E)$, where $V$ is the set of $|V|=N$ nodes and $E$ is the set of $|E|=M$ edges, is defined as "The number of edges on the shortest path from i to j is the shortest path length ($s'$) of that path. The $s'$ is a number associated with the pair $i-j$: for each pair $i-j$ there is one and only one $s':s'(i,j)$"\cite{santos2022shortestpathpathlength} 
 
 \begin{figure}
-\centering
-\includegraphics[width=.3\textwidth]{images/topo_comparison/janet1.png}\hfill
-\includegraphics[width=.3\textwidth]{images/topo_comparison/janet2.png}\hfill
-\includegraphics[width=.3\textwidth]{images/topo_comparison/janet3.png}
-\caption{Shortest Path comparison between ER, BA and real-world Janet Backbone topology}
-\label{fig:shortest_path_comp}
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/final-topo-comparison/1_1.png}
+    \caption{Erdos-Renyi (23 nodes,p=0.1), Barabasi-Albert(23 nodes, 5) and Janet-Backbone topology comparison}
+    \label{fig:1_1_comparison}
 \end{figure}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/final-topo-comparison/2_1.png}
+    \caption{Erdos-Renyi (23 nodes,p=0.2), Barabasi-Albert(23 nodes, 5) and Janet-Backbone topology comparison}
+    \label{fig:2_1_comparison}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/final-topo-comparison/3_1.png}
+    \caption{Erdos-Renyi (23 nodes,p=0.3), Barabasi-Albert(23 nodes, 5) and Janet-Backbone topology comparison}
+    \label{fig:3_1_comparison}
+\end{figure}
+
+\newpage
 
 \subsection{Virtual Lab implementation}
-
-\subsubsection{NetworkX}
-%Describe framework
-NetworkX is a python library which is designed to be used for the "creation, manipulation, and study of the structure dynamics, and functions of complex networks." \cite{networkX} Due to it's extensive functionality, utilising this library for the evaluation and processing of graph topologies increases the speed and ease with which it can be carried out. Furthermore, as a consequence of it's robust implementation and over 90\% test coverage of it's code-base, results yielded from code utilising this library are highly trustworthy. 
-
-%Modules used from framework
-For the generation of random graph topologies, namely Erdos-Renyi and Barabasi-Albert, the corresponding modules are used; \newline
-\verb|erdos_renyi_graph(n, p, seed=None, directed=False)| 
-\verb|barabasi_albert_graph(n, m, seed=None, initial_graph=None)| 
-
-For the comparison between the various topologies the following modules were used; \newline 
-\verb|all_pairs_shortest_path_length(G, cutoff=None)|
-%Code excerpt
-
-
 
 \subsubsection{Oracle VM VirtualBox}
 % Virtual environment allows greater portability
@@ -416,6 +368,19 @@ Upon deployment of the lab, the lifecycle can be managed through deploy, destroy
 \subsubsection{Alpine Linux}
 % Lightweight distro
 For the implemented virtual network lab, Alpine Linux has been used due to it's small size and resource efficiency. When installed on a container, it  requires a minimal 8 MB of space \cite{alpine}. However, this reduction of space overhead has a trade-off; an instance of this is that Apline uses a non-regular package manager called apk; this has proved to be problematic during creation of the network lab, due to lack of support to install the required network scanning libraries on containers to facilitate testing. 
+
+\subsubsection{NetworkX}
+%Describe framework
+NetworkX is a python library which is designed to be used for the "creation, manipulation, and study of the structure dynamics, and functions of complex networks." \cite{networkX} Due to it's extensive functionality, utilising this library for the evaluation and processing of graph topologies increases the speed and ease with which it can be carried out. Furthermore, as a consequence of it's robust implementation and over 90\% test coverage of it's code-base, results yielded from code utilising this library are highly trustworthy. 
+
+%Modules used from framework
+For the generation of random graph topologies, namely Erdos-Renyi and Barabasi-Albert, the corresponding modules are used; \newline
+\verb|erdos_renyi_graph(n, p, seed=None, directed=False)| 
+\verb|barabasi_albert_graph(n, m, seed=None, initial_graph=None)| 
+
+For the comparison between the various topologies the following modules were used; \newline 
+\verb|all_pairs_shortest_path_length(G, cutoff=None)|
+%Code excerpt
 
 \subsubsection{Virtual network pipeline}
 As previously mentioned, to facilitate simulation of the randomly generated network topologies, the generated structures could be parsed into the YAML format required for containerlab to deploy virtual networks. Implementation of a seamless "pipeline" is of great benefit as it allows modular steps in the creation of the network lab to be connected linearly, allowing straightforward configuration and control of each step in the process. Furthermore, it also has the additional benefit of being more extensible and resilient to bugs and anomalies as these can be isolated at specific stages in the pipeline. An additional benefit is ease of use, should the framework be adopted in the future for further research. Below, a framework is proposed with the aim of accomplishing this; from the initial generation of network topologies to the simulation and evaluation of them using configurable contemporary methods. 
@@ -501,7 +466,7 @@ topology:
     - node1:eth1
     - node3:eth1
 \end{lstlisting}
-    \caption{Example resultant YAML file using parse_to_yml() function}
+    \caption{Example resultant YAML file using python parsing function}
     \label{fig:parse_topo_example_yml}
 \end{figure}
 

@@ -1,0 +1,48 @@
+\begin{algorithm}
+\caption{Barabási-Albert (BA) Model Algorithm}\label{alg:BA}
+\begin{algorithmic}[1]
+\State \textbf{Input:} Initial number of nodes $m_0$, number of edges to attach $m \leq m_0$, total number of nodes $N$
+\State \textbf{Output:} Scale-free network with $N$ nodes
+\State
+
+\State \textbf{Step 1:} \textbf{Initialization}
+\State Create an initial network with $m_0$ nodes and connect every node to every other node (complete graph).
+
+\State \textbf{Step 2:} \textbf{Growth}
+\For{$i = m_0 + 1$ to $N$}
+    \State Add a new node $i$ with $m$ edges.
+    \State Connect the new node $i$ to $m$ existing nodes chosen with probability proportional to their degree.
+    \For{each existing node $j$}
+        \State Calculate the probability $\Pi(j)$ that node $i$ connects to node $j$:
+        \[
+        \Pi(j) = \frac{k_j}{\sum_{l} k_l}
+        \]
+        where $k_j$ is the degree of node $j$ and the sum is over all existing nodes $l$.
+    \EndFor
+\EndFor
+
+\State \textbf{Step 3:} \textbf{Repeat}
+\State Repeat the growth process until the network contains $N$ nodes.
+
+\State \textbf{Step 4:} \textbf{Output the network}
+\State Return the generated scale-free network.
+\end{algorithmic}
+\end{algorithm}
+
+
+\subsubsection{Graph Isomorphism}
+Given two graphs 
+
+\begin{equation}
+    (u,v) \in E_1 \Leftrightarrow (f(u),f(v)) \in E_2
+\end{equation}
+
+\subsubsection{Degree Correlation}
+
+\begin{equation}
+    r = \frac{\sum(x_i - \hat{x})(y_i-\hat{y}}{\sqrt{\sum}(x_i-\hat{x})^2\sum(y_i-\hat{y})^2}
+\end{equation}
+
+
+%\subsubsection{Spectral Comparison}
+%\subsubsection{Clustering Coefficient Comparison}
