@@ -280,11 +280,15 @@ Each of these approaches could be facilitated by implementing them in python to 
 The python library networkx \cite{networkX} has stochastic graph generating functions which can implement the Erdos-Renyl and Barabasi-Albert models, reducing overall development time and ensuring accurate and efficient code. 
 
 \subsection{Generated and Real-world Topologies comparison}
-To verify the suitability of the methods used to generate the stochastic topologies, they will be compared with the real-world topologies found from the Internet Topology Zoo database using the distribution of the shortest path length to ensure a rigorous and comprehensive approach. Furthermore, the results of this comparison will be used as the basis of selection from the different topology generation methods mentioned previously. The most closely correlated model will be selected and used to implement the final network topologies in the virtual network lab.
+To investigate the difference between methods used to generate the stochastic topologies in the context of real-world networks, they will be compared with the real-world topologies found from the Internet Topology Zoo database using the distribution of the shortest path length to ensure a rigorous and comprehensive approach. A possible approach which could be employed, would be to use the results of this comparison to be used as the basis of selection from the different topology generation methods mentioned previously, with the most closely correlated models  being selected and used to implement the final network topologies in the virtual network lab. 
+
+However, in order to provide ample variance and a larger testing area, generated models which are not closely correlated to ones found in real-world topologies are also of great utility. By providing potentially novel testing environments and structures, the network scanning tools can be more thoroughly evaluated; providing richer data.
 
 
 \subsubsection{Distribution of shortest path lengths}
 The shortest path length of a given graph $G = (V,E)$, where $V$ is the set of $|V|=N$ nodes and $E$ is the set of $|E|=M$ edges, is defined as "The number of edges on the shortest path from i to j is the shortest path length ($s'$) of that path. The $s'$ is a number associated with the pair $i-j$: for each pair $i-j$ there is one and only one $s':s'(i,j)$"\cite{santos2022shortestpathpathlength} 
+
+As shown from the comparison between the Erdos-Renyi, Barabasi-Albert, and real-world topologies, Janet and Napnet; the Erods-Renyi has the closest distribution of shortest path lengths to the real-world topologies. It also shows the effect that changing the $p$, parameter has, with 0.2 being the optimal value out of the measured parameters. 
 
 \begin{figure}
     \centering
@@ -308,6 +312,28 @@ The shortest path length of a given graph $G = (V,E)$, where $V$ is the set of $
 \end{figure}
 
 \newpage
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/final-topo-comparison/napnet/1_1.png}
+    \caption{Erdos-Renyi (5 nodes,p=0.1), Barabasi-Albert(5 nodes, 5) and Napnet topology comparison}
+    \label{fig:napnet_1}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/final-topo-comparison/napnet/2_1.png}
+    \caption{Erdos-Renyi (5 nodes,p=0.2), Barabasi-Albert(5 nodes, 5) and Napnet topology comparison}
+    \label{fig:napnet_2}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/final-topo-comparison/napnet/3_1.png}
+    \caption{Erdos-Renyi (5 nodes,p=0.3), Barabasi-Albert(5 nodes, 5) and Napnet topology comparison}
+    \label{fig:napnet_3}
+\end{figure}
+
 
 \subsection{Virtual Lab implementation}
 
@@ -472,7 +498,16 @@ topology:
 
 
 \subsubsection{Proposed topologies}
-6 topologies are proposed to be used to evaluate each of the network scanning methods, with 3 being randomly generated and 3 being from real-world topologies. Each topology has been selected from larger topology sets as outline in previous sections, with the intention of providing a diverse range of structures with which to test the scanning tools. This approach does have limitations however, including selection bias, and a relatively small number of test-cases. 
+6 topologies to be used for the evaluation of the network scanning tools are proposed. The selected topologies include randomly generated and real-world topologies. This is with the aim to achieve a balanced testing environment, with sufficient variance and provide a diverse range of structures with which to test the scanning tools. The randomly generated topologies have been generated using the Erdos-Renyi and Barabasi-Albert method, and the real-world topologies have been selected from the Internet Topology Zoo database. 
+
+This approach does have limitations however, including selection bias, and a relatively small number of test-cases. By utilising the previously mentioned virtual network pipeline, which would automate the testing process, one could increase the number of tested topologies and address these limitations. Furthermore, due to resource constraints the network topologies which are proposed to be used for testing are all of size $<=$ 10 nodes. This is a further limitation, as it restricts the size and complexity of the proposed topology models; the network scanning tools are often used to scan large, complex networks where the structure is unknown, which this virtual network lab is unable to replicate. However, given suitably increased resources, the proposed framework and testing environment could support vastly larger networks with greater complexity to address this limitation. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/final_6_graphs.png}
+    \caption{6 Proposed topologies}
+    \label{fig:6_prop_topo}
+\end{figure}
 
 %compare the generated networks and real-world networks r value, as a measure of correlation and therefore relavance in testing the network scanning tools
 
@@ -480,8 +515,6 @@ topology:
 Below, the performance on both real-world and randomly generated topologies will be outlined for each network scanning tool. 
 
 \subsubsection{Original traceroute (Jacobson's)}
-
-
 
 \subsubsection{Paris traceroute}
 
