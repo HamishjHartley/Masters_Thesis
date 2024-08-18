@@ -6,23 +6,23 @@
 %Research methodology description
 
 % 1.2 Provide a problem statement with a strong hypothesis / Define your methodological approach 
-Contemporary tools used to map network topologies such as Paristraceroute\cite{anomalies} and DiamondMiner\cite{diamond-miner} have improved on the original traceroute. However, these contemporary methods still have deficiencies, suggesting that there is still potential for these tools to be extended to mitigate these flaws. Thorough analysis of results from the literature and also from experimentation in a virtually implemented network will form the basis of the proposed improvements to the contemporary methods. 
+ In order to ensure the validity of the findings from experimentation in the virtual network lab and also create a testing framework which can be used to benchmark contemporary network scanning methods in the future, a multi-factorial approach will be employed. This includes a purposeful sample selection; topologies most commonly found in real world networks will be implemented, these include Bus, Ring, Mesh, Star, Tree and Hybrid configurations. This is to ensure that the selected sample population is representative of the overall population. In addition to this, structures sourced from the Internet Topology Zoo will also be implemented and evaluated. Furthermore, a robust enumeration of macros across all possible network shapes will be explored, this will likely increase the available search space covered by the evaluation, through testing and evaluating the edge cases. Using this approach has the benefit of possibly highlighting potential flaws and unexpected behaviour of current methods, in a way that using conventional structures might not. To achieve stochastic network generation, the Erdos-Renyi and Barabasi-Albert models have been employed. By combining both  'real-world' and theoretical network topology structures, the implemented network lab has improved versatility and coverage of yielded data.  
 
-In order to ensure the validity of the findings from experimentation in the virtual network lab and also create a testing framework which can be used to benchmark contemporary network scanning methods in the future, a multi-factorial approach will be employed. This includes a purposeful sample selection; topologies most commonly found in real world networks will be implemented, these include Bus, Ring, Mesh, Star, Tree and Hybrid configurations. This is to ensure that the selected sample population is representative of the overall population. Furthermore, a robust enumeration of macros across all possible network shapes will be explored, this will likely increase the available search space covered by the evaluation, through testing and evaluating the edge cases. Using this approach has the benefit of possibly highlighting potential flaws and unexpected behaviour of current methods, in a way that using conventional structures might not. By combining both  'real-world' and theoretical network topology structures, the implemented network lab has improved versatility and coverage of yielded data.  
+Contemporary tools used to map network topologies such as Paristraceroute\cite{anomalies} and DiamondMiner\cite{diamond-miner} have improved on the original traceroute. However, these contemporary methods still have deficiencies, suggesting that there is still potential for these tools to be extended to mitigate these flaws. Thorough analysis of results from the literature and also from experimentation in an optimally configured virtually implemented lab, can potentially form the basis of the proposed improvements to the contemporary methods. This highlights the importance of having the network lab parameters optimally configured, to allow effective evaluation. Furthermore, an effective testing environment is not limited to measuring the performance of network scanning tools, and has other applications ranging from testing different protocols and router images. 
 
 % 3. State research design
 \subsection{Research methods}
 %Research methods description
-Evaluation of the contemporary methods will be primarily quantitative. With the main measure of performance being focusing on the accuracy of the path tracking when tested on network structures in the virtual lab. Additionally, the execution time, packet loss handling  will also be taken into account.
+Evaluation of the varying topology structures will be primarily quantitative. With comparison between each equivalently sized topology structures being carried out using the shortest path difference and degree correlation. 
 
-They will be evaluated using ContainerLab \cite{containerlab} which is an open source network emulator which allows the creation of virtual network environments, leveraging the powerful docker framework, it supports containerized router images of products offers by major companies such as Cicso, Juniper and Dell. For the purpose of this research project, Alpine Linux will be used for the container images, due to it's low running constraints compared with similar Linux distributions such as Debian\cite{alpine} and open-source code base. This mitigates any potential memory concerns when simulating more complex network topologies. Furthermore, by evaluating the contemporary tools in a virtual network lab the experiment variables are fully controllable, allowing for repeatable results and avoidance of external interference. By using a virtual environment the possibility of numerous results being collected for each configuration are ensured, allowing statistical analysis of the results to be carried out. This further increases the validity of the evaluation. Additionally, by simulating the network topologies ethical implications of evaluating performance on the real-world internet are avoided. 
+The proposed virtual lab environment will be implemented primarily using ContainerLab \cite{containerlab} which is an open source network emulator which allows the creation of virtual network environments, leveraging the powerful docker framework, it supports containerized router images of products offers by major companies such as Cicso, Juniper and Dell. Alpine Linux for the purpose of this research project, will be used as an example for the container images, due to it's low running constraints compared with similar Linux distributions such as Debian\cite{alpine} and open-source code base. This mitigates any potential memory concerns when simulating more complex network topologies. Furthermore, by evaluating contemporary tools or otherwise in a virtual network lab the experiment variables are fully controllable, allowing for repeatable results and avoidance of external interference. By using a virtual environment the possibility of numerous results being collected for each configuration are ensured, allowing statistical analysis of the results to be carried out. This further increases the validity of the evaluation. Additionally, by simulating the network topologies ethical implications of evaluating performance on the real-world internet are avoided. 
 
 % 4. Discuss specifics of data collection and methodology
 
 % 5. Justify methods used - mention limitations, strengths and weaknesses.
 
 \subsection{Virtual Network lab}
-To facilitate evaluation of the contemporary network scanning tools, a virtual network lab has been created. The implemented virtual network lab was created inside a virtual machine running the Debian based Linux Operating System  Kali Linux. 
+To facilitate evaluation of contemporary network scanning tools, a virtual network lab has been created. The implemented virtual network lab was created inside a virtual machine running the Debian based Linux Operating System  Kali Linux. 
 
 Using this approach allows for an isolated testing environment, avoiding external factors which could interfere with the experimental results. Furthermore, by employing a virtual lab complete control and configuration of the experimental variables is ensured. Due to this the experimental results can be replicated a number of times, increasing the validity of the findings. 
 
@@ -33,7 +33,7 @@ In order to measure and compare the performance of tools utilised to map network
 Additionally, in conjunction with the practical real-world approach, a robust enumeration of all possible network shapes will be employed to increase the available performance search space of each tool in topology measurement. Utilising this stochastic approach allows for potential edge cases to be identified, possibly highlighting previously unknown design flaws/weaknesses in a given tool. 
 
 \subsection{Topology models}
-Below, the network topology models used in the creation of the virtual network lab will be described and outlined, in order to justify the rationale and decision making process in creation of the final models. 
+Below, a description and evaluation for each of the basic network topology model types will be given. This is to give the reader further context about the structural and behavioural characteristics of each topology; as they will combine in various ways to make up the basis of more complicated structures. This will also form part of the justification for the rationale and decision making process in selection of the final models.
 
 \subsubsection{Ring topology}
 A Ring topology comprises of a set of nodes connected in a circular manner. In other words, each node is connected to precisely two other nodes. This results in a singular uninterrupted route for data to travel through each node. Internet service providers employ ring network's for the "backbone" of many of their networks \cite{ring_network}, furthermore it is also commonly found on local area networks and Intranets. Due to it's circular nature it has a "low transmission efficiency and high delay", for a packet to traverse the entire network it must first past through every preceding node. This also highlights its other deficiency; it's unreliability. If a node or link breaks in the network, the nodes beyond are unreachable. \cite{ring_network}
@@ -280,59 +280,45 @@ Each of these approaches could be facilitated by implementing them in python to 
 The python library networkx \cite{networkX} has stochastic graph generating functions which can implement the Erdos-Renyl and Barabasi-Albert models, reducing overall development time and ensuring accurate and efficient code. 
 
 \subsection{Generated and Real-world Topologies comparison}
-To investigate the difference between methods used to generate the stochastic topologies in the context of real-world networks, they will be compared with the real-world topologies found from the Internet Topology Zoo database using the distribution of the shortest path length to ensure a rigorous and comprehensive approach. A possible approach which could be employed, would be to use the results of this comparison to be used as the basis of selection from the different topology generation methods mentioned previously, with the most closely correlated models  being selected and used to implement the final network topologies in the virtual network lab. 
+To investigate the difference between methods used to generate the stochastic topologies in the context of real-world networks, they will be compared with the real-world topologies found from the Internet Topology Zoo database using the distribution of the shortest path length and also their Degree Correlation coefficient to ensure a rigorous and comprehensive approach. A possible approach which could be employed, would be to use the results of this comparison to be used as the basis of selection from the different topology generation methods mentioned previously, with the most closely correlated models  being selected and used to implement the final network topologies in the virtual network lab. 
 
-However, in order to provide ample variance and a larger testing area, generated models which are not closely correlated to ones found in real-world topologies are also of great utility. By providing potentially novel testing environments and structures, the network scanning tools can be more thoroughly evaluated; providing richer data.
-
+However, in order to provide ample variance and a larger testing area, generated models which are not closely correlated to ones found in real-world topologies are also of great utility. By providing potentially novel testing environments and structures, network scanning tools and otherwise can be more thoroughly evaluated; providing richer data.
 
 \subsubsection{Distribution of shortest path lengths}
-The shortest path length of a given graph $G = (V,E)$, where $V$ is the set of $|V|=N$ nodes and $E$ is the set of $|E|=M$ edges, is defined as "The number of edges on the shortest path from i to j is the shortest path length ($s'$) of that path. The $s'$ is a number associated with the pair $i-j$: for each pair $i-j$ there is one and only one $s':s'(i,j)$"\cite{santos2022shortestpathpathlength} 
+The shortest path length of a given graph $G = (V,E)$, where $V$ is the set of $|V|=N$ nodes and $E$ is the set of $|E|=M$ edges, is defined as "The number of edges on the shortest path from i to j is the shortest path length ($s'$) of that path. The $s'$ is a number associated with the pair $i-j$: for each pair $i-j$ there is one and only one $s':s'(i,j)$"\cite{santos2022shortestpathpathlength} \cite{DSPL_second_source}
 
-As shown from the comparison between the Erdos-Renyi, Barabasi-Albert, and real-world topologies, Janet and Napnet; the Erods-Renyi has the closest distribution of shortest path lengths to the real-world topologies. It also shows the effect that changing the $p$, parameter has, with 0.2 being the optimal value out of the measured parameters. 
+\subsubsection{Degree Correlation Coefficient}
+The second metric used to compare the varying network topologies is their Degree correlation. It is defined as:
+"[capturing] the relationship between the degrees of nodes that link each other" \cite{barabasi2016network} This measurement reflects the modality of how a given networks nodes link together, due to the degree comparison between two given nodes. 
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.7\linewidth]{images/final-topo-comparison/1_1.png}
-    \caption{Erdos-Renyi (23 nodes,p=0.1), Barabasi-Albert(23 nodes, 5) and Janet-Backbone topology comparison}
-    \label{fig:1_1_comparison}
-\end{figure}
+\begin{equation}
+    k_{nn}(K_i) = \frac{1}{K_i}\sum^{N}_{J=1}A_{ij}k_j
+\end{equation}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.7\linewidth]{images/final-topo-comparison/2_1.png}
-    \caption{Erdos-Renyi (23 nodes,p=0.2), Barabasi-Albert(23 nodes, 5) and Janet-Backbone topology comparison}
-    \label{fig:2_1_comparison}
-\end{figure}
+A nodes degree is a measure of being how many connections it has with other nodes in a network. Highly connected nodes have a high degree and are also sometimes known as "hubs". Due to a phenomenon known as the "Friendship paradox", nodes are more likely to be linked to other nodes which have a higher degree(hubs) than nodes with a smaller degree. However, not all networks conform to this trend, with network types being characterised in the context of degree correlation as either neutral, assortative or disassortative. Neutral networks are interconnected at random, assortative networks operate according to the friendship paradox whereby hubs tend to connect to other hubs, and lastly disassortative networks, whereby hubs tend not to connect to one another in favour of small degree nodes. 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\linewidth]{images/final-topo-comparison/3_1.png}
-    \caption{Erdos-Renyi (23 nodes,p=0.3), Barabasi-Albert(23 nodes, 5) and Janet-Backbone topology comparison}
-    \label{fig:3_1_comparison}
+    \includegraphics[width=0.3\linewidth]{images/Degree_Correlation_Examples.png}
+    \caption{Real world examples of Assortative, Neutral and Dissassortative networks \cite{barabasi2016network}}
+    \label{fig:Example_Degree_Corr}
 \end{figure}
 
-\newpage
+In other words, the Degree correlation of a given network can characterise whether a network is neutral, assortative or disassortative. The degree correlation coefficient \cite{Assortive_Mixing} can be used to distinguish individual network degree correlations as a single number. Which is useful for comparison across multiple networks. It is defined through the following equation:
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.7\linewidth]{images/final-topo-comparison/napnet/1_1.png}
-    \caption{Erdos-Renyi (5 nodes,p=0.1), Barabasi-Albert(5 nodes, 5) and Napnet topology comparison}
-    \label{fig:napnet_1}
-\end{figure}
+\begin{equation}
+    r= \sum_{jk}\frac{jk(e_{jk}-q_jq_k)}{\sigma^2}
+\end{equation}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.7\linewidth]{images/final-topo-comparison/napnet/2_1.png}
-    \caption{Erdos-Renyi (5 nodes,p=0.2), Barabasi-Albert(5 nodes, 5) and Napnet topology comparison}
-    \label{fig:napnet_2}
-\end{figure}
+with,
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.7\linewidth]{images/final-topo-comparison/napnet/3_1.png}
-    \caption{Erdos-Renyi (5 nodes,p=0.3), Barabasi-Albert(5 nodes, 5) and Napnet topology comparison}
-    \label{fig:napnet_3}
-\end{figure}
+\begin{equation}
+    \sigma^2 = \sum_{k}k^2q_k-\left[\sum_{k}kq_k\right]^2
+\end{equation}
+
+$r$ is the Pearson correlation coefficient between the degree of each node across their shared link. \cite{barabasi2016network} It exists on the range between $-1 <=r<=1$, with assortative networks resulting in $r<0$, $r=0$ for neutral networks and $r>0$ for disassortative networks. 
+
+%compare the generated networks and real-world networks r value, as a measure of correlation and therefore relavance in testing the network scanning tools
 
 
 \subsection{Virtual Lab implementation}
@@ -390,6 +376,10 @@ Upon deployment of the lab, the lifecycle can be managed through deploy, destroy
     \caption{Containerlab network topology visualisation feature, showing a simple ring network structure.}
     \label{fig:ring_container}
 \end{figure}
+
+\subsubsection{Routing protocols}
+
+%Discuss recommended routing protocol used in lab 
 
 \subsubsection{Alpine Linux}
 % Lightweight distro
@@ -496,20 +486,30 @@ topology:
     \label{fig:parse_topo_example_yml}
 \end{figure}
 
+\newpage
 
 \subsubsection{Proposed topologies}
-6 topologies to be used for the evaluation of the network scanning tools are proposed. The selected topologies include randomly generated and real-world topologies. This is with the aim to achieve a balanced testing environment, with sufficient variance and provide a diverse range of structures with which to test the scanning tools. The randomly generated topologies have been generated using the Erdos-Renyi and Barabasi-Albert method, and the real-world topologies have been selected from the Internet Topology Zoo database. 
+Six sets of three topologies are proposed to be evaluated, the selected topologies include randomly generated and real-world topologies. Each set has network topologies of varying size and parameters; this is with the aim to achieve a balanced testing environment, with sufficient variance and provide a diverse range of structures which could be utilised in an experimentation context. The randomly generated topologies have been generated using the Erdos-Renyi and Barabasi-Albert method, and the real-world topologies have been selected from the Internet Topology Zoo database. 
 
-This approach does have limitations however, including selection bias, and a relatively small number of test-cases. By utilising the previously mentioned virtual network pipeline, which would automate the testing process, one could increase the number of tested topologies and address these limitations. Furthermore, due to resource constraints the network topologies which are proposed to be used for testing are all of size $<=$ 10 nodes. This is a further limitation, as it restricts the size and complexity of the proposed topology models; the network scanning tools are often used to scan large, complex networks where the structure is unknown, which this virtual network lab is unable to replicate. However, given suitably increased resources, the proposed framework and testing environment could support vastly larger networks with greater complexity to address this limitation. 
+This approach does have limitations however, including selection bias, and a relatively small number of test-cases. By utilising the previously mentioned virtual network pipeline, which would automate the testing process, one could increase the number of tested topologies and address these limitations. Furthermore, some of the network topologies which are proposed to be used for the virtual network lab have a large size and complexity, which could be unfeasible to implement and simulated due to resource constraints. 
+This is a further limitation, as it restricts the size and complexity of the final proposed topology models; the network scanning tools are often used to scan large, complex networks where the structure is unknown, which this virtual network lab is unable to replicate. However, given suitably increased resources, the proposed framework and testing environment could support vastly larger networks with greater complexity to address this limitation. 
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.7\linewidth]{images/final_6_graphs.png}
-    \caption{6 Proposed topologies}
-    \label{fig:6_prop_topo}
-\end{figure}
+    \begin{figure}[!ht]
+\centering
+    \subfloat[]{\includegraphics[width=0.45\linewidth]{images/Topology set/6.png}}
+\hfil
+    \subfloat[]{\includegraphics[width=0.45\linewidth]{images/Topology set/13.png}}
 
-%compare the generated networks and real-world networks r value, as a measure of correlation and therefore relavance in testing the network scanning tools
+    \subfloat[]{\includegraphics[width=0.45\linewidth]{images/Topology set/20.png}}
+\hfil
+    \subfloat[]{\includegraphics[width=0.45\linewidth]{images/Topology set/23.png}}
+
+    \subfloat[]{\includegraphics[width=0.45\linewidth]{images/Topology set/24.png}}
+\hfil
+    \subfloat[]{\includegraphics[width=0.45\linewidth]{images/Topology set/27.png}}
+\caption{2 x 3 grid of images}
+    \label{fig:my figure}
+    \end{figure}
 
 \subsection{Network scanning methods}
 Below, the performance on both real-world and randomly generated topologies will be outlined for each network scanning tool. 
