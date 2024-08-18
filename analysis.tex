@@ -28,7 +28,7 @@ Experimental data will be exported in JSON format, from which it can be easily p
 
 
 \subsubsection{Topology set 1}
-As shown from the comparison between the Erdos-Renyi, Barabasi-Albert, and real-world topologies, Janet and Napnet; the Erods-Renyi has the closest distribution of shortest path lengths to the real-world topologies. It also shows the effect that changing the $p$, parameter has, with 0.2 being the optimal value out of the measured parameters. 
+As shown from the comparison between the shortest path length distribution of Erdos-Renyi, Barabasi-Albert, and real-world topologies, Dataxchange and Layer42; the Erods-Renyi graph with p=0.5 has most closely matches the distribution of shortest path lengths to the real-world topology Dataxchange. With both topologies having frequencies of approximately 0.5 and 0.6 of shortest path length 1.0 respectively. However, there is still some disparity between the frequency of higher shortest path length values between the two topologies. Additionally, the Erdos-Renyi graph with p=0.5 also most closely matches the Layer42 network, with the difference between the shortest path length value 1.0 being approximately 1 and approximately 0.75 for shortest path length value 2.0.  
 
 \begin{figure}
     \centering
@@ -44,6 +44,8 @@ As shown from the comparison between the Erdos-Renyi, Barabasi-Albert, and real-
     \label{fig:enter-label}
 \end{figure}
 
+However, when taking into consideration the degree correlation coefficient, the Barabasi-Albert graph with m=3, is the most closely correlated to both the Dataxchange and Layer42 networks. The Barabasi-Albert generated network has an $r$ value of -0.49, compared with $r$ values of -0.45 and -0.6 for Dataxchange and Layer42 respectively.  
+
 \begin{figure}
     \centering
     \includegraphics[width=0.9\linewidth]{images/FINAL-TOPO-COMP/Degree-correlation-coeff/deg-coeff-6.png}
@@ -52,6 +54,7 @@ As shown from the comparison between the Erdos-Renyi, Barabasi-Albert, and real-
 \end{figure}
 
 \subsubsection{Topology set 2}
+similarly to the previous topology set, the Erdos-Renyi graph generated using $p=0.3$, most closely matches both the Navigata and Nsfnet topologies. a
 \begin{figure}
     \centering
     \includegraphics[width=0.9\linewidth]{images/FINAL-TOPO-COMP/line-13.png}
@@ -162,3 +165,31 @@ As shown from the comparison between the Erdos-Renyi, Barabasi-Albert, and real-
 \end{figure}
 
 \subsection{Evaluation of Results}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/FINAL-TOPO-COMP/Degree-coeff-distrib/Distrib-by-size.png}
+    \caption{Caption}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/FINAL-TOPO-COMP/Degree-coeff-distrib/Distrib-by-type.png}
+    \caption{Caption}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/FINAL-TOPO-COMP/Degree-coeff-distrib/Distrib-by-param.png}
+    \caption{Caption}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/FINAL-TOPO-COMP/Degree-coeff-distrib/Distrib-28-real-world.png}
+    \caption{Caption}
+    \label{fig:enter-label}
+\end{figure}
