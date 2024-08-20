@@ -54,7 +54,8 @@ However, when taking into consideration the degree correlation coefficient, the 
 \end{figure}
 
 \subsubsection{Topology set 2}
-similarly to the previous topology set, the Erdos-Renyi graph generated using $p=0.3$, most closely matches both the Navigata and Nsfnet topologies. a
+Similarly to the previous topology set, the Erdos-Renyi graph generated using $p=0.3$, most closely matches both the Navigata and Nsfnet topologies with regards to shortest path length distribution. Particularly so with the Navigata topology.
+
 \begin{figure}
     \centering
     \includegraphics[width=0.9\linewidth]{images/FINAL-TOPO-COMP/line-13.png}
@@ -76,7 +77,11 @@ similarly to the previous topology set, the Erdos-Renyi graph generated using $p
     \label{fig:enter-label}
 \end{figure}
 
+When comparing the degree correlation coefficient, both topologies generated using the Barabasi-Albert model match each of the real-world topologies respectively. With the m=2 model having a Degree correlation coefficent of -0.62, compared with Navigatas degree correlation coefficient of -0.61. Furthermore, the m=3 model has a degree correlation coefficient of -0.22 which is equal to Nsfnet's -0.22, additionally the Erdos-Renyi p=0.5 model is also close to Nsfnet with a degree correlation of -0.2. The Erdos-Renyi p=0.3 model has a positive degree correlation coefficient of 0.11, which categorises it as Dissasortative, the rest of the topologies have negative degree correlation coefficients categorising them as Assortative.
+
 \subsection{Topology set 3}
+None of the generated model's of size 20 nodes have a comparable Shortest path length distribution to either of the real-world models. The real-world topologies both have flatter shortest path length distribution profiles, peaking at approximately 0.3 frequency of a shortest path length 3. Contrastingly, the p=0.5 Erdos-Renyi generated topology rises sharply from 0 to peak at approximately 0.5 frequency for shortest path lengths 1 and 2, then sharply dropping back down to 0. Interestingly, the m=3 Barabasi-Albert model and p=0.3 Erdos-Renyi model have very similar Distribution profiles, peaking at approximately 0.6 frequency for a shortest path length of 2. 
+
 \begin{figure}
     \centering
     \includegraphics[width=0.9\linewidth]{images/FINAL-TOPO-COMP/line-20.png}
@@ -97,8 +102,11 @@ similarly to the previous topology set, the Erdos-Renyi graph generated using $p
     \caption{Degree correlation coefficient}
     \label{fig:enter-label}
 \end{figure}
+Through initial analysis of the varying degree correlation coefficients it is clear that the selected real-world topologies are distinct. With Quest having a positive degree correlation coefficient of 0.2 and Eli -0.04, this indicates that they are dissasortative and neutral topologies respectively. Out of the generated topologies the Erdos-Renyi p=0.5 model is similar to Eli, with a degree correlation coefficient of -0.03. 
 
 \subsection{Topology set 4}
+The shortest path length distribution of York, a real-world topology is relatively linear, maintaining a frequency of 0.3 shortest path lengths between 2 and 9. The generated topologies and Aconet have distinctly different profiles, with the Barabasi-Albert m=2 model having the closest shortest path length distribution to Aconet. Similarly to the previous topology set, the Erdos-Renyi p=0.3 and Barabasi-Albert m=3 model have very similar distributions, with both peaking just below 0.6 frequency for a shortest path length of 2. 
+
 \begin{figure}
     \centering
     \includegraphics[width=0.9\linewidth]{images/FINAL-TOPO-COMP/line-23.png}
@@ -112,6 +120,7 @@ similarly to the previous topology set, the Erdos-Renyi graph generated using $p
     \caption{Caption}
     \label{fig:enter-label}
 \end{figure}
+None of the four generated topologies have a similar degree correlation coefficient to the real-world topologies, with values ranging from -0.01 to -0.23 they are weakly assortative networks. However, the similarity is further established between the Erdos-Renyi p=0.3 and Barabasi-Albert m =3 models, both having comparible values of -0.12 and -0.23 respecitvely. Both York and Aconet are more strongly Assoratitive networks, with degree correlation coefficients of -0.51 and -0.4 respectively. 
 
 \begin{figure}
     \centering
@@ -121,9 +130,10 @@ similarly to the previous topology set, the Erdos-Renyi graph generated using $p
 \end{figure}
 
 \subsection{Topology set 5}
+Much like the previous topology set, the real-world topologies have a relatively flat profile. This might suggest a trend that increasing the network size flattens the shortest path length distribution. Additionally, also much like the previous topology sets the Erdos-Renyi p=0.3 and Barabasi-Albert m=3 topologies have very similar distributions. 
 \begin{figure}
     \centering
-    \includegraphics[width=0.9\linewidth]{images/FINAL-TOPO-COMP/line-24.png}
+    distribution \includegraphics[width=0.9\linewidth]{images/FINAL-TOPO-COMP/line-24.png}
     \caption{Caption}
     \label{fig:enter-label}
 \end{figure}
@@ -135,6 +145,7 @@ similarly to the previous topology set, the Erdos-Renyi graph generated using $p
     \label{fig:enter-label}
 \end{figure}
 
+The comparison between the topology set shows an increasing degree correlation coefficient, with both the Erdos-Renyi models having values -0.05 and -0.10 which has some disparity with Psinet and Vision's degree corelation coefficient values of -0.37 and -0.43 respectively. Out of the generated topologies, only the Barabasi-Albert m=3 model is comparable to Psinet and vision, with a degree correlation coefficient of -0.37. 
 \begin{figure}
     \centering
     \includegraphics[width=0.9\linewidth]{images/FINAL-TOPO-COMP/Degree-correlation-coeff/deg-coeff-24.png}
@@ -143,6 +154,7 @@ similarly to the previous topology set, the Erdos-Renyi graph generated using $p
 \end{figure}
 
 \subsection{Topology set 6}
+Both Bbnplanet and Integra have very similar shortest path length distributions and a much flatter profile compared with the generated topologies; much like several of the previous real-world topologies. Furthermore, much like previous topology sets both the Erdos-Renyi p=0.3 model and Barabasi-Albert m=3 model have compatible distributions. 
 \begin{figure}
     \centering
     \includegraphics[width=0.9\linewidth]{images/FINAL-TOPO-COMP/line-27.png}
