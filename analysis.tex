@@ -154,7 +154,7 @@ The comparison between the topology set shows an increasing degree correlation c
 \end{figure}
 
 \subsection{Topology set 6}
-Both Bbnplanet and Integra have very similar shortest path length distributions and a much flatter profile compared with the generated topologies; much like several of the previous real-world topologies. Furthermore, much like previous topology sets both the Erdos-Renyi p=0.3 model and Barabasi-Albert m=3 model have compatible distributions. 
+Both Bbnplanet and Integra have very similar shortest path length distributions and a much flatter profile compared with the generated topologies; much like several of the previous real-world topologies. Furthermore, much like previous topology sets both the Erdos-Renyi p=0.3 model and Barabasi-Albert m=3 model have comparable distributions. 
 \begin{figure}
     \centering
     \includegraphics[width=0.9\linewidth]{images/FINAL-TOPO-COMP/line-27.png}
@@ -169,6 +169,8 @@ Both Bbnplanet and Integra have very similar shortest path length distributions 
     \label{fig:enter-label}
 \end{figure}
 
+The degree correlation coefficient for both Erdos-Renyi generated topologies are slightly assoratitve, with $r$ values of -0.14 and -0.09 respectively. Additionally, both Barabasi-Albert models have lower degree correlation coefficient relative to the Erdos-Renyi with $r $values of -0.21 and -0.31 respectively. This echos previous results on the prior topology sets, whereby both types of generated models are generally assortative, with the Barabasi-Albert models having an elevated assortativity compared with the Erdos-Renyi models. 
+
 \begin{figure}
     \centering
     \includegraphics[width=0.9\linewidth]{images/FINAL-TOPO-COMP/Degree-correlation-coeff/deg-coeff-27.png}
@@ -177,6 +179,7 @@ Both Bbnplanet and Integra have very similar shortest path length distributions 
 \end{figure}
 
 \subsection{Evaluation of Results}
+Through evaluation of the comparison using statistical methods between the six sets of generated topologies and real-world topologies, clear trends are revealed. The mean degree correlation coefficient for every topology set was below -0.1, indicating that on average the topologies are assortative. The topology set with size 6 nodes has the lowest mean degree correlation coefficient of approximately -0.4, and the topology set of size 20 nodes has the highest mean degree correlation coefficient of approximately -0.1. The set comprising of topologies of size 13 nodes has the largest distribution.    
 
 \begin{figure}
     \centering
@@ -184,6 +187,8 @@ Both Bbnplanet and Integra have very similar shortest path length distributions 
     \caption{Caption}
     \label{fig:enter-label}
 \end{figure}
+
+The distribution plot below highlights that there is a distinct difference in degree correlation coefficient between each topology type. This range encompasses the Erdos-Renyi models, which are weakly assortative, the Barabasi-Albert models which are moderately assortative and the real-world models which are the most assortative. 
 
 \begin{figure}
     \centering
