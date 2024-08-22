@@ -188,7 +188,7 @@ Through evaluation of the comparison using statistical methods between the six s
     \label{fig:enter-label}
 \end{figure}
 
-The distribution plot below highlights that there is a distinct difference in degree correlation coefficient between each topology type. This range encompasses the Erdos-Renyi models, which are weakly assortative, the Barabasi-Albert models which are moderately assortative and the real-world models which are the most assortative. 
+The distribution plot below highlights that there is a distinct difference in degree correlation coefficient between each topology type. This range encompasses the Erdos-Renyi models, which are weakly assortative, the Barabasi-Albert models which are moderately assortative and the real-world models which are the most assortative. This result could be due to the preference in real-world networks to aggregate around central "hubs", which have a high degree and are highly connected. Thus, it can be suggested that this is a characteristic of real-world networks on average, and that if a stochastically generated network is to act as a model for a realistic testing environment it must also have this characteristic. Based on this reasoning, the topologies generated using the Barabasi-Albert model are more representative of real-world networks as their degree corrleation coefficient more closely matches that of real-wold topologies. However, there is also a justification to be made for using topologies generated using the Erdos-Renyi model, as they can provide a diverse and varied experimental environment and increase the available testing space due to their random and un-predictable nature. 
 
 \begin{figure}
     \centering
@@ -197,12 +197,15 @@ The distribution plot below highlights that there is a distinct difference in de
     \label{fig:enter-label}
 \end{figure}
 
+Continuing on from the previous analysis, through plotting the individual degree correlation coefficient distributions the difference between both stochastic models is further highlighted. With the Erdos-Renyi models both being relatively similar, with both having comparable average degree correlation coefficients of approximately -0.1 and relatively similar distributions. The key information which is shown is the difference between both Barabasi-Albert models, with the m=2 model having a much larger distribution and slightly higher average than the m=3 model. This is consistent with the prior comparison with real-world topologies, which the m=3 model was the most closely matched to. 
 \begin{figure}
     \centering
     \includegraphics[width=0.9\linewidth]{images/FINAL-TOPO-COMP/Degree-coeff-distrib/Distrib-by-param.png}
     \caption{Caption}
     \label{fig:enter-label}
 \end{figure}
+
+The below plot reflects the distribution of a larger set of 28 real-world topologies, with an average degree correlation coefficient of approximately -0.4 this further illustrates the assortative tendency of such networks. There are outliers which have significantly higher degree correlation coefficients above 0, showing some variance between networks, however this is to be expected with a larger set of data encompassing different network sizes. 
 
 \begin{figure}
     \centering
