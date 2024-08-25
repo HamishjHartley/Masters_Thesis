@@ -111,26 +111,24 @@ Furthermore, it also incorporates probe set generation logic, which allows track
 
 %-------------------------------------------------------
 %Dublin traceroute
-Another modern tool inspired by the original Traceroute, and which builds upon the progress made by Paris traceroute is Dublin Traceroute. Dublin traceroute solves the NAT problem which was a limitation of paris-traceroute."Dublin Traceroute forges a custom IP ID in the outgoing packets, and keeps track of them in the response packets. If the response packet references an outgoing packet with different source/destination IP addresses and ports, this may indicate the presence of a NAT." \cite{dublin} \cite{dublin_website} 
-
-It is also implemented in C++ for it's core and has also improved on other limitations of Paris traceroute, namely it's memory safety \cite{dublin}, therefore increasing it's robustness. 
-
-Furthermore, it also offers a python library and interface as a wrapper on top of the C++ codebase. Results are exported as JSON data allowing ease of integration within other applications, adding to it's modularity and usability. \cite{dublin_website}
+Another modern tool inspired by the original Traceroute, and which builds upon the progress made by Paris traceroute is Dublin Traceroute. Dublin traceroute solves the NAT problem which was a limitation of paris-traceroute."Dublin Traceroute forges a custom IP ID in the outgoing packets, and keeps track of them in the response packets. If the response packet references an outgoing packet with different source/destination IP addresses and ports, this may indicate the presence of a NAT." \cite{dublin} \cite{dublin_website} It is also implemented in C++ for it's core and has also improved on other limitations of Paris traceroute, namely it's memory safety \cite{dublin}, therefore increasing it's robustness. Furthermore, it also offers a python library and interface as a wrapper on top of the C++ codebase. Results are exported as JSON data allowing ease of integration within other applications, adding to it's modularity and usability. \cite{dublin_website}
 
 %--------------------------------------------------------
 %Zeph map alogrithms
 %Analysis 
-By applying reinforcement learning for distributed tracing of network routes, the Zeph algorithmn discovers the probing directives to allocate to the vantages points in order to maximize topology discovery. 
-
-It follows a sequence of cycles, utilising positive feedback from previous cycles so as to re-enforce the learning process, whilst still trying new directives simultaneously. By using this approach, the total coverage should improve with each continual cycle. \cite{zephMap}
+By applying reinforcement learning for distributed tracing of network routes, the Zeph algorithmn discovers the probing directives to allocate to the vantages points in order to maximize topology discovery. It follows a sequence of cycles, utilising positive feedback from previous cycles so as to re-enforce the learning process, whilst still trying new directives simultaneously. By using this approach, the total coverage should improve with each continual cycle. \cite{zephMap}
 
 %----------------------------
 %2. Can randomly generated topologies capture the characteristics and layout of real-world topologies? 
+Given the multitude of tools designed to map internet topologies, an appropriate testing environment should be established to verify the performance of such tools. The need for such an environment is ever increasing, due to the rising complexity of internet networks which can be problematic for scanning tools to operate effectively in. 
+
 "Virtual laboratories are computer-based, interactive environments that allow a user to perform a set of tasks that would normally be performed in a laboratory" \cite{india_virtual}
-Utilising a computer-based environment instead of a traditional physical laboratory has utility across many areas of research and science, as it is an effectively "closed" environment from external factors; however, admittedly there are still physical complications that could occur, in the form of "bugs" or electrical faults. It also often has a significantly lower overhead, requiring only a computer with a suitable internet connection to replicate complex and varied experimental scenarios. Somewhat obviously, the utility and suitability is more greatly amplified of using a virtual laboratory in the field of computer science. This is due to the subject of measurement or investigation often already existing within a virtual framework, such as a software process within an operating system. However, the study of larger systems consisting of unusual or many sub-systems adds an additional layer of complexity which requires further consideration. One such system is an internet network, which is composed of many nodes and clients interconnected using potentially many different protocols. In an internet network context, a virtual lab can be utilized as a medium in which measurement, observation and management of a simulated network can be accomplished. \cite{virtual_network_lab} 
+Utilising a computer-based environment instead of a traditional physical laboratory has utility across many areas of research and science, as it is an effectively "closed" environment from external factors; however, admittedly there are still physical complications that could occur, in the form of "bugs" or electrical faults however these are limited. It also often has a significantly lower overhead, requiring only a computer with a suitable internet connection to replicate complex and varied experimental scenarios. Somewhat obviously, the utility and suitability is more greatly amplified of using a virtual laboratory in the field of computer science. This is due to the subject of measurement or investigation often already existing within a virtual framework, such as a software process within an operating system. However, the study of larger systems consisting of unusual or many sub-systems adds an additional layer of complexity which requires further consideration. One such system is an internet network, which is composed of many nodes and clients interconnected using potentially many different protocols. In an internet network context, a virtual lab can be utilized as a medium in which measurement, observation and management of a simulated network can be accomplished. \cite{virtual_network_lab} 
+
+To successfully capture the complex structure and behaviour of a network, containers can be employed; such as in the case of the containerlab \cite{containerlab} which leverages the docker framework \cite{docker.com}. "The container gives you a “view” or a “slice” of an OS already running. You access OS constructs as if you were running an application directly on the OS". \cite{containerization} Routers and clients can be hosted on discrete containers, which contain their respective operating systems, and then interlinked through configurable protocols. These containers can be interfaced with via SSH or through the docker exec function, enabling interaction from any point in the network. 
 
 %3. What purpose does randomly generating networks which emulate real-world networks fulfil? 
-
+Randomly generated topology structures can be used to augment the diversity of configurations implemented inside a virtual network lab, and also serve as possible benchmarks with which to evaluate contemprary methods and tool. \cite{random_power_grid_topo} Such methods have been suggested by Hoger et al for evaluation of smart grid applications, however there is a gap in the literature evaluating the role that randomly generated networks could serve in an internet network context. 
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{images/lit_review_top.png}
@@ -138,4 +136,7 @@ Utilising a computer-based environment instead of a traditional physical laborat
     \label{fig:enter-label}
 \end{figure}
 
+
 %4. What is the role of generated network topologies which are different/uncorrelated to real-world networks?
+
+\newpage
