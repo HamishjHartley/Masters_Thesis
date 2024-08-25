@@ -1,12 +1,4 @@
 \section{Introduction and Literature Review}
-%TODO:
-%Re-phrase introduction
-
-%Add analysis to MDA, D miner, Tokyo ping, zeph
-
-%Add discussion to possible work section
-
-
 %Introduction which sets the scene
 %for the research proposal and puts the research in context.
 \subsection{Introduction}
@@ -15,12 +7,11 @@ The importance and impact of the internet over the past 30 years cannot be overs
 A network topology is defined as the physical and logical layout of nodes and connections in a network, with nodes usually being either a router, switch or software emulating a switch or router. Being able to map the topology of this structure is key not only to establish the most efficient routes for data transmission by reducing latency but also to ensure even traffic distribution across different network paths via Load balancing. There are also additional advantages of accurate mapping, which include mitigating potential security threats, fault detection and scalability. A common tool used to achieve this is Traceroute, with it being widely used, from the diagnosis of network
 problems to the assemblage of internet maps. \cite{anomalies} However the original Traceroute is very outdated, being released in 1989 \cite{jacobson1989traceroute} it was not built to match the modern complexities of internet networks. As such, several contemporary implementations built upon the principles of traceroute have been implemented, with the aim to address problems presented in modern networks such as NAT (Network Address Translation) and load-balancing. However, there is still room for further extensions and improvements to these contemporary methods, which will enable optimised network topology mapping. 
 
-Furthermore, to facilitate testing and evaluation of these tools in an ethical and controllable way, a virtual network lab is often required to be used, as opposed to a real-world network. Through implementing a virtual network, every aspect of a given network can be controlled; namely it's topology structure, router and client operating system images and routing protocols used between each node in the network. Additionally using this approach avoids potential ethical implications of running scans across networks where every client might not be able to consent. It also ensures that results yielded from experimentation are repeatable and reproducible, with both being essential in order to maintain integrity of the experiment and it's results. As mentioned, a central factor in the creation of a virtual network lab is the topology of simulated 'nodes', which are often represented using containerised operating systems to allow a high level of configurability and control. In this paper, varying topology structures will analysed and compared on the basis of their suitability to be used in a virtual network lab context; with a particular focus on evaluation of network scanning tools. The origin of these topologies will be both from real-world examples and also randomly generated using several different mathematical models. 
-
+To facilitate testing and evaluation of these tools in an ethical and controllable way, a virtual network lab is often required to be used, as opposed to a real-world network. Through implementing a virtual network, every aspect of a given network can be controlled; namely it's topology structure, router and client operating system images and routing protocols used between each node in the network. Additionally using this approach avoids potential ethical implications of running scans across networks where every client might not be able to consent. It also ensures that results yielded from experimentation are repeatable and reproducible, with both being essential in order to maintain integrity of the experiment and it's results. As mentioned, a central factor in the creation of a virtual network lab is the topology of simulated 'nodes', which are often represented using containerised operating systems to allow a high level of optimisation and control. In this paper, varying topology structures will be analysed and compared on the basis of their suitability to be used in a virtual network lab context; with a particular focus on evaluation of network scanning tools. The origin of these topologies will be both from a real-world dataset and also randomly generated using several different mathematical models. By combining real topologies and randomly generated topologies using varying models, similarities and differences in key characteristics such as the structure and linking between nodes can be identified. This could be significant in the context of a virtual network lab, as it would allow for a more diverse range of test environments, further increasing available data and ensuring a more concrete investigation and analysis of what is being tested, i.e a network scanning tool such as traceroute. The generated topologies also have the advantage of being able to be generated an unlimited number of times, increasing the size of the set of available topologies which could be used in such a context. Therefore, by leveraging these factors a possible standardised benchmark set could be developed as an objective measure of the subject of experimentation. 
 \subsection{Literature Review}
 %Description and critical discussion of
-%research context relevant to the chosen
-%research context.
+
+%1. Why are network testing environments required?
 
 %-------------------------------------------------------
 %Traceroute
@@ -51,7 +42,6 @@ As stated above, the original traceroute is insufficient to correctly recognize 
   \end{center}
 \end{figure}
 
-
 %----------------------------------------------------
 %Different network topology types and their implications
 
@@ -81,8 +71,6 @@ probes to send on a hop-by-hop basis in order to enumerate all reachable interfa
 
 %Analysis
 Rather than send a set amount of probes per hop like the original traceroute which sends 3, the MDA varies this amount based on a controllable parameter. \cite{MDA2} The parameter is the upper limit of the probability of not revealing the entire multi-path network. This is highly advantageous as it can adapt to any given network structure, which in the "real" internet can be extremely complex and have many paths, but also due to it's adaptability it can still remain relatively lightweight. However, as it is a stochastic algorithm there is an element of uncertainty to the produced result, this is accounted for by "yeilding" the  confidence of the final output to provide some further information about the validity of the result. \cite{MDA-lite}\cite{diamond-miner}\cite{MDA3}
-
-
 
 %Analysis
 MDA-lite is a further improvement on the MDA algorithm by reducing overhead, whilst still having the same performance. It achieves this by operating based on the assumption of uniform hops, with probes being sent at each hop without node control, although node control is still employed in specific cases. One flow identifier from each previously discovered vertex in the preceding hop are reused, this is then followed on with further previously used and new flow identifiers. MDA-lite acts on the premise that diamonds which are met during the network scan "will be uniform and un-meshed". \cite{MDA-lite} 
@@ -129,12 +117,6 @@ It is also implemented in C++ for it's core and has also improved on other limit
 
 Furthermore, it also offers a python library and interface as a wrapper on top of the C++ codebase. Results are exported as JSON data allowing ease of integration within other applications, adding to it's modularity and usability. \cite{dublin_website}
 
-
-%--------------------------
-% REVISED RESEARCH PROPOSAL UP UNTIL THIS POINT
-%
-
-
 %--------------------------------------------------------
 %Zeph map alogrithms
 %Analysis 
@@ -142,20 +124,18 @@ By applying reinforcement learning for distributed tracing of network routes, th
 
 It follows a sequence of cycles, utilising positive feedback from previous cycles so as to re-enforce the learning process, whilst still trying new directives simultaneously. By using this approach, the total coverage should improve with each continual cycle. \cite{zephMap}
 
-%In order to optimise the hyper parameters of the algorithm as to achieve optimal coverage of the directed links, zeph uses the approach of 
+%----------------------------
+%2. Can randomly generated topologies capture the characteristics and layout of real-world topologies? 
+"Virtual laboratories are computer-based, interactive environments that allow a user to perform a set of tasks that would normally be performed in a laboratory" \cite{india_virtual}
+Utilising a computer-based environment instead of a traditional physical laboratory has utility across many areas of research and science, as it is an effectively "closed" environment from external factors; however, admittedly there are still physical complications that could occur, in the form of "bugs" or electrical faults. It also often has a significantly lower overhead, requiring only a computer with a suitable internet connection to replicate complex and varied experimental scenarios. Somewhat obviously, the utility and suitability is more greatly amplified of using a virtual laboratory in the field of computer science. This is due to the subject of measurement or investigation often already existing within a virtual framework, such as a software process within an operating system. However, the study of larger systems consisting of unusual or many sub-systems adds an additional layer of complexity which requires further consideration. One such system is an internet network, which is composed of many nodes and clients interconnected using potentially many different protocols. In an internet network context, a virtual lab can be utilized as a medium in which measurement, observation and management of a simulated network can be accomplished. \cite{virtual_network_lab} 
 
+%3. What purpose does randomly generating networks which emulate real-world networks fulfil? 
 
-%----------------------------------
-%Clear links from the conclusions of
-%literature review to the research questions
-%presented in Section 2
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/lit_review_top.png}
+    \caption{Randomly generated topology designed to replicate power grid networks \cite{random_power_grid_topo}}
+    \label{fig:enter-label}
+\end{figure}
 
-\subsection{Possible work}
-%Possible improvements which could be carried out for the project
-Based on the studied literature above there are several avenues of research which could be carried out to provide potentially fruitful results. Such as expanding upon the existing dublin traceroute implementation to include features such as the Multipath Detection Algorithm and zeph algorithm, and also support for TCP, ICMP and DNS probes in order to create the optimal traceroute tool which improves upon the previous tools such as traceroute and paris traceroute. With these improvements implemented, there could be scope to conduct an internet-wise topology survey as additional work for the project to provide supporting evidence of the additional features merit. 
-
-Furthermore, the MDA and zeph alogrithms could also be extended to IPv6 as their existing implementations only support IPv4. However this could prove to be time-comsuming due to IPv6's address size of 128-bits. 
-
-\newpage
-
-
+%4. What is the role of generated network topologies which are different/uncorrelated to real-world networks?

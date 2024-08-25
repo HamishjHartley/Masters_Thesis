@@ -1,29 +1,9 @@
 \section{Recommendations and conclusions}
 
 \subsection{Recommendations}
-% Discuss Limitations of evaluation metric
-Analysing real-world and randomly generated topologies has utility by both highlighting important characteristics which define these network structures, and also by establishing the similarities and differences between each topology type across a number of different network sizes. Using the data from this measurement can help establish which of the stochastic models is most closely matched to real-world networks across each topology set, and therefore which would be most suitable to be implemented in a virtual lab context. 
-
-However, this approach has several drawbacks; Firstly the real-world topology set is comprised of networks cover a very large geographical area, often providing coverage across countries, continents and the entire world, thus they might not be an accurate representation of more smaller scale but still significant networks, such as an enterprise intranet which could possibly exhibit different linking structures. Furthermore, smaller networks are often desired to be simulated in a virtual lab context as they represent the environment in which varying tools and methods such as traceroute \cite{jacobson1989traceroute} and ping are deployed. Another limitation of this approach is the restricted variance in the parameters for both models use to generate the topologies, through only implementing two variants of each model per set the possible results are bounded which could therefore negatively impact meaningful analysis; with an additional consequence of this is that a possibly sub-optimal model configuration could be proposed. By including more variance in size for real-world network topologies used in the topology sets, or perhaps as a separate set, the possible discrepancies between smaller and larger networks could be addressed. This would allow for more balanced results which more fully encapsulate real-world topologies as a whole. The small number of parameters used in the generation of the Erdos-Renyi and Barabasi-Albert models could be improved by increasing the number of evaluated parameter configurations for both respectively. This would increase the amount and heterogeneity of available data, which a similar improvement to increasing the variance in the real-world topologies. 
-
-% Discuss how in topology generation / simulation that several extra layers of complexity have not been covered in this report, outline how they possibly could be going forward in future. Such as router image, router configuration, linking protocols, load-balancing, NAT's, ip obsucation, VPNs, etc.
-Containerlab \cite{containerlab}, which is a suitable environment in which the evaluated topologies could be implemented for the purpose of experimentation has been suggest. Furthermore, a lab generation pipeline has been proposed, with supporting code which can generate a network topology based on a chosen model, then be parsed to a YML file format which can then be deployed through the containerlab \cite{containerlab} framework as a simulated topology, allowing further analysis and experimentation. This also has the intention of increasing the speed and ease with which varying topologies can be implemented.  However, simulation of the evaluated topologies has not been directly demonstrated, and only mathematical analysis of the topology structures has been provided. The lack of practical analysis of how each topology performs when used in a simulated virtual lab to measure tools such as traceroute and ping means that the practical application of such topologies cannot be verified. This is suggested for future work, whereby a set of commonly used network analysis tools could be used in a virtual lab environment to practically gain more insight into how each topology type performs across varying metrics. 
-
-Furthermore, whilst a network topology can represent the overall structure of a network it does not capture the full complexity and layers which are present in such an environment. One such example of a characteristic which has not been covered is configuration of each individual node/routers in the network, which in a real-world scenario can have significant effects of the behaviour of how traffic flows through such networks and as a consequence how the evaluated model would behave. One such example is load-balancing which is commonly employed to ensure even traffic flow in a network, which this can result in in-consistent routing paths of packets in a topology. Addressing this limitation is challenging as it could potentially introduce disproportionate variable and take the focus away from how analysis on strictly topology performance. However, as they are present in real-world networks including these features in a controlled manner could add a further  
 
 
-
-% Discuss improvements for the contemporary methods
-
-% Discuss/ Propose new approach to scanning networks, away from the traceroute bases approach and something novel. 
-
-% Discuss symmetry between randomly generated networks and real-world networks
-
-% Discuss other random network generation techniques
-
-% Expand on proposed Topology library generated structure concept - could be an interesting contribution.
-
-% Discuss other topology modalities, i.e Peer2Peer
+% outline major achievements, barriers to its success and particularly innovative aspects
 
 \subsection{Conclusion}
  However, further work is needed to establish the suitability of generated topology models, such as implementation in a simulation and testing using a framework such as the previously discussed containerlab \cite{containerlab} which has not been covered. 
