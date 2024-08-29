@@ -1,9 +1,16 @@
 \section{Recommendations and conclusions}
 
 \subsection{Recommendations}
+%Provide recommendations to practice
+Based on on the results of the evaluation of the vary topology models, several recommendations can be made for implementation in a virtual network lab. Firstly, it is important to establish the intent and context in which the virtual lab will be used, as this will relate directly to the recommendations given. If the context of the virtual lab is to ensure a highly realistic environment, then it would be recommended to use network topologies which exhibit a fairly high level of associativity, with a degree correlation coefficient less than -0.2. This characteristic was observed in the distribution of degree correlation coefficient, across 28 real-world networks. Furthermore, if one is inclined to use randomly generated topologies which most closely capture real-world structures, the Barabasi-Albert model using $m=3$ would be best suited out of the evaluated stochastic topology generation methods.
 
+For other contexts, such as performing a comprehensive analysis of how a scanning method performs, implementing an enumeration of diverse topology networks which exhibit variance in both size and structure is recommended. In other words, in such a context no topology is preferential. By using a varied set of topologies, with randomly generated origins such as the Erdos-Renyi and Barabasi-Albert models in conjunction with real-world examples the available test coverage is increased. 
 
+Regardless of the context, the proposed virtual network lab could be integrated directly into a unit testing frame-work, via an automated pipeline. By leveraging the straightforward deployment of lab sessions via containerlab, a developer or team could have verifiable proof that the tool meets specified requirements and executes in an intended manner. This would be particularly useful if done in a native Linux environment or using Window Subsystem for Linux\cite{wsl}.
 % outline major achievements, barriers to its success and particularly innovative aspects
 
 \subsection{Conclusion}
+%Provide a critical discussion that links the findings back tothe original review
+
+% outline major achievements, barriers to its success and particularly innovative aspects
  However, further work is needed to establish the suitability of generated topology models, such as implementation in a simulation and testing using a framework such as the previously discussed containerlab \cite{containerlab} which has not been covered. 
