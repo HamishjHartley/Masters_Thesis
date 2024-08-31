@@ -164,30 +164,6 @@ The Erdos-Renyi model \cite{Erdos_renyi_origin} covers two similar mathematical 
     G(n,M)
 \end{equation}
 
-\begin{algorithm}
-\caption{\( G(n, M) \) Erdős-Rényi Model}\label{alg:GnM}
-\begin{algorithmic}[1]
-\State \textbf{Input:} Number of nodes \( n \), number of edges \( M \)
-\State \textbf{Output:} Random graph \( G(V, E) \)
-
-\State \textbf{Step 1:} \textbf{Initialization}
-\State Create a set of \( n \) nodes \( V = \{v_1, v_2, \dots, v_n\} \).
-\State Initialize an empty set of edges \( E = \emptyset \).
-
-\State \textbf{Step 2:} \textbf{Edge Selection}
-\State Let \( \mathcal{P} \) be the set of all possible pairs of nodes \( \{(v_i, v_j) \mid 1 \leq i < j \leq n\} \).
-\State Randomly select \( M \) unique pairs from \( \mathcal{P} \) without replacement.
-
-\State \textbf{Step 3:} \textbf{Edge Addition}
-\For{each selected pair \( (v_i, v_j) \)}
-    \State Add the edge \( (v_i, v_j) \) to the edge set \( E \).
-\EndFor
-
-\State \textbf{Step 4:} \textbf{Output the graph}
-\State The graph \( G(V, E) \) consists of the node set \( V \) and the edge set \( E \).
-\end{algorithmic}
-\end{algorithm}
-
 The second variant, proposed by Gilbert is defined through $G(n,p)$, whereby a graph is randomly created by linking labeled nodes in a random manner, according to the parameter $p$ an edge will be added in the graph between two nodes. 
 
 \begin{equation}
@@ -197,30 +173,6 @@ The second variant, proposed by Gilbert is defined through $G(n,p)$, whereby a g
 \begin{equation}
     p^M(1-p)^{(n \atop 2)-M}
 \end{equation}
-
-\begin{algorithm}
-\caption{\( G(n, p) \) Erdős-Rényi Model}\label{alg:Gnp}
-\begin{algorithmic}[1]
-\State \textbf{Input:} Number of nodes \( n \), probability \( p \)
-\State \textbf{Output:} Random graph \( G(V, E) \)
-
-\State \textbf{Step 1:} \textbf{Initialization}
-\State Create a set of \( n \) nodes \( V = \{v_1, v_2, \dots, v_n\} \).
-\State Initialize an empty set of edges \( E = \emptyset \).
-
-\State \textbf{Step 2:} \textbf{Edge Creation}
-\For{each pair of nodes \( (v_i, v_j) \) with \( 1 \leq i < j \leq n \)}
-    \State Generate a random number \( r \) uniformly distributed between 0 and 1.
-    \If{\( r \leq p \)}
-        \State Add the edge \( (v_i, v_j) \) to the edge set \( E \).
-    \EndIf
-\EndFor
-
-\State \textbf{Step 3:} \textbf{Output the graph}
-\State The graph \( G(V, E) \) consists of the node set \( V \) and the edge set \( E \).
-\end{algorithmic}
-\end{algorithm}
-
 
 A the model is probabilistic, the parameter $p$ exists on the range 0 to 1; intuitively as $p$ increases the likelihood of generating graphs with more links increases, with the converse also being true.
 
