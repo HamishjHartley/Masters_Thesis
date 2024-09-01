@@ -1,7 +1,21 @@
+%TC:ignore
 \begin{abstract}
-
 %The abstract is a short (up to one page) summary of the dissertation, its conclusions, findings, etc. It should not be a chapter-by-chapter description. An example of an abstract is attached.
+
+
+
+%Summarise research questions/aims
+This project has investigated varying topology structures, to be used for evaluation of network scanning tools in a virtual network lab. The origin of the investigated topology structures was both from real-sources\cite{topology_zoo} and also randomly generated using the Erdos-Renyi\cite{Erdos_renyi_origin} and Barabasi-Albert\cite{Albert_barabasi_2002} models. The motive of this research was to establish the components required to create an optimised virtual network laboratory. Furthermore, also to establish if randomly generated topologies can capture the characteristics observed in real-world topologies, and also the role implemented network topologies have in a virtual lab context. 
+%Why is it important
+Due to the observed deficiencies in internet scanning methods\cite{diamond-miner}\cite{anomalies}, in conjunction with the ever increasing complexity of internet networks, it is paramount to have an effective and contained lab environment with which to test and measure such methods.  
+%Discuss the findings and conclusions. 
+The Barabasi-Albert model with parameter $m=3$ was the most closely correlated to real-world network topologies, with both being relatively assortative and tending to aggregate around nodes with higher degrees also known as "hubs". However, it was also concluded that the Erdos-Renyi model could provide some utility by increasing the variance of possible topology structures, maximising the testing search space. A virtual lab implementation has also been proposed, utilising the containerlab\cite{containerlab} framework. In conjunction with this, a deployment pipeline has also been proposed, with the aim of facilitating seamless and automated testing of but not limited to internet scanning tools.
+
+
+
+%A virtual network lab was proposed, with 
+
 
 \end{abstract}
 
-
+%TC:endignore
